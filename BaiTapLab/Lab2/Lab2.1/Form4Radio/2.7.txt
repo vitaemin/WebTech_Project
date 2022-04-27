@@ -1,0 +1,1 @@
+Trả lời: Khi đổi method sang thành GET thì toàn bộ các thông tin của form đã submit sẽ được gửi và in trực tiếp trên URL của trang web
