@@ -15,10 +15,47 @@
       margin-top: 20px;
     }
   </style>
+  <script>
+    function validateForm() {
+      //check username
+      var username = document.getElementById("username").value;
+      const usernamePattern = new RegExp("[a-zA-Z]");
+      if(usernamePattern.test(username)) {
+        // valid username
+      } else {
+        //invalid username
+        alert("Username invalid");
+        return false;
+      }
+
+      //check email
+      var email = document.getElementById("email").value;
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      if(emailPattern.test(email)) {
+        //valid email
+      } else {
+        alert("Email invalid");
+        return false;
+      }
+
+      //check password
+      var password = document.getElementById("password").value;
+      const passPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+      if(passPattern.test(password)) {
+        //valid password
+      } else {
+        //invalid password
+        alert("Password should contain at least: one digit, one lowercase, one uppercase and 8 characters ");
+        return false;
+      }
+      alert("Form validated!!")
+      return true;
+    }
+  </script>
 </head>
 
 <body>
-  <form action="11_9.html" method='POST' id='myForm'>
+  <form action="11_9.html" method='' id='myForm' onsubmit="validateForm()">
     <label for="">Enter Username:</label><br>
     <input type="text" id='username' name='username'>
     <br>
