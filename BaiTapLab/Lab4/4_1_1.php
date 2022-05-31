@@ -7,7 +7,7 @@
     $server = 'localhost'; 
     $user = 'root'; 
     $pass = ''; 
-    $my_db = 'my_db'; 
+    $my_db = 'mydatabase'; 
     $table_name = 'Products'; 
     $connect = mysqli_connect($server, $user, $pass); 
     $SQLCreateDb = "CREATE DATABASE IF NOT EXISTS $my_db";
