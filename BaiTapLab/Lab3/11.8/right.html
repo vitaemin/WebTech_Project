@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Document</title>
+  <style>
+    .editor {
+      width: 95%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    function addBlog() {
+      var blog = document.getElementById("editor").value;
+      document.getElementById("para").innerHTML = blog;
+    }
+  </script>
+  <h1>right</h1>
+
+  <textarea name="Editor" id="editor" class='editor' style='border: 2px solid black;'
+    rows='30'>Write something here...</textarea>
+  <br>
+  <br>
+  <button onclick='addBlog()'>Submit</button>
+
+</body>
+
+</html>

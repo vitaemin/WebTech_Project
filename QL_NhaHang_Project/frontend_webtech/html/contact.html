@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../css/contact.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+		<script
+			src="https://kit.fontawesome.com/48b5735cbc.js"
+			crossorigin="anonymous"
+		></script>
+		<title>Food Store</title>
+	</head>
+	<body>
+		<div class="top-bar">
+			<img
+				src="https://static.vecteezy.com/system/resources/previews/000/656/608/original/vector-restaurant-badge-and-logo-good-for-print.jpg"
+				alt="logo"
+			/>
+			<div class="navbar">
+				<a href="./index.html">Trang chủ</a>
+				<a href="./intro.html">Giới thiệu</a>
+				<a href="./order.html">Đặt bàn</a>
+				<a href="./menu.html">Thực đơn</a>
+				<a href="./news.html">Tin tức</a>
+				<a class="pressing-btn" href="#">Liên hệ</a>
+			</div>
+			<i class="fa-solid fa-bars" onclick="toggleMenu();"></i>
+		</div>
+
+    <div class="first-img">
+			<img
+				src="https://homebbq.thietkewebsitemienphi.com/wp-content/uploads/2018/02/banner-234.jpg"
+				alt=""
+			/>
+		</div>
+
+    <div class="wrap">
+      <div class="left-text">
+        <h1>Contact</h1>
+        <p>Chúng tôi luôn trân trọng mọi ý kiến của quý khách, ý kiến từ quý khách sẽ giúp chúng tôi nâng cao về chất lượng phục vụ chính quý khách cũng góp phần vào sự thành công và phát triển thương hiệu Sun Homes BBQ của chúng tôi:</p>
+        <p>Webdesign rất hoan nghênh độc giả gửi thông tin và góp ý cho chúng tôi!</p>
+        <br><b>Địa chỉ:</b> Trường Đại học Bách khoa Hà Nội.</br>
+        <b>Email:</b> cnw@gmail.com</br>
+        <b>SDT:</b> 0909.009.009</br>
+        <b>Website:</b> www.website.com</p>
+      </div>
+
+      <div class="infor">
+        <form action="#">
+          <input type="text" placeholder="Tên của bạn..." required/>
+          <input type="email" placeholder="Địa chỉ email..." required/>
+          <input type="text" placeholder="Số điện thoại..." required/>
+          <input type="text" placeholder="Mục đích liên hệ..." required/>
+          <textarea rows="5" placeholder="Nội dung chi tiết..." required></textarea>
+          <button type="submit">Gửi liên hệ</button>
+        </form>
+      </div>
+    </div>
+
+		<script>
+			const toggleMenu = () => {
+				const menu = document.querySelector('.navbar');
+				if (menu.style.visibility == 'hidden') menu.style.visibility = 'visible';
+				else menu.style.visibility = 'hidden';
+			}
+		</script>
+  </body>
+</html>
