@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.header {
+    color: aliceblue;
+    background-color: red;
+    font-size: 20px;
+    padding: 4px;
+    float: left;
+    width: 100%;
+}
+.footer {
+    color: aliceblue;
+    background-color: blue;
+    font-size: 20px;
+    padding: 4px;
+    width: 100%;
+    float: left;
+}
+.main_content {
+    width: 78%;
+    float: left;
+    height: 88vh;
+    padding: 1%;
+}
+.main_content h1 {
+    margin: 0;
+    padding: 0;
+}
+.main_content p {
+    font-size: 18px;
+}
+.sidebar {
+    width: 19%;
+    float: right;
+    font-size: 18px;
+    background-color: yellow;
+    height: 90vh;
+    padding: 0.5%;
+}
