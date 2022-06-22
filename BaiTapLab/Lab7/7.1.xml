@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<student_info>
+  <name>Nguyen Viet Dang</name>
+  <dob>
+    <date>4</date>
+    <month>4</month>
+    <year>2001</year>
+  </dob>
+  <nation>Vietnam</nation>
+  <college>HUST</college>
+</student_info>
