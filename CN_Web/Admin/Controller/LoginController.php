@@ -35,7 +35,7 @@ class LoginController
             session_start();
             $_SESSION["err"]= $err;
 //                var_dump($_SESSION["err"]);exit;
-            header('Location: Login.php');exit;
+            header('Location: index.php');exit;
         }
     }
 }

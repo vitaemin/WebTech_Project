@@ -14,6 +14,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
     case "POST":
+        if(isset($_POST['reserve_table'])){
+            $tableController->reserveTable();
+        }
         break;
     default:
         //404;

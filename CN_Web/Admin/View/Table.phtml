@@ -1,6 +1,8 @@
 <?php
 
 namespace View\Table;
+use Controller\TableController;
+
 session_start();
 if(isset($_SESSION["staff"])){
     $staff = $_SESSION["staff"];
@@ -8,7 +10,16 @@ if(isset($_SESSION["staff"])){
 }else{
     header('Location: index.php');
 }
-
+$tableController = new TableController();
+$tables = $tableController->getAllTable();
+//var_dump($tables);
+$table_id = 1;
+if(isset($_GET['table_id'])){
+    $_SESSION['table_id'] = $_GET['table_id'];
+    $table_id = $_SESSION['table_id'];
+}
+$currenttable = $tableController->getTableById($table_id);
+$grouptable = $tableController->getTableByOtherTable($table_id);
 ?>
 
 <!doctype html>
@@ -19,6 +30,7 @@ if(isset($_SESSION["staff"])){
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/Table.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <title>Document</title>
 </head>
@@ -61,8 +73,195 @@ if(isset($_SESSION["staff"])){
             </a>
         </aside>
 
-        <content>
-
+        <content class="content-wrapper">
+            <nav class="content-nav">
+                <?php
+                $reservetableurl = $_SERVER['PHP_SELF'];
+                $reservetableurl .= "?reserve";
+                echo "<a href='$reservetableurl' class='reserveurl'>";
+                echo "Đặt bàn";
+                echo "</a>";
+                ?>
+            </nav>
+            <div class="table-wrapper">
+                <div class="content-table">
+                    <div class="table-note">
+                        <div class="table-note-group">
+                            <button class="table-not-booked"></button>
+                            <span>Chưa đặt</span>
+                        </div>
+                        <div class="table-note-group">
+                            <button class="table-booked"></button>
+                            <span>Đã đặt</span>
+                        </div>
+                        <div class="table-note-group">
+                            <button class="table-received"></button>
+                            <span>Đang sử dụng</span>
+                        </div>
+                    </div>
+                    <div class="table-list">
+                        <?php
+                        foreach ($tables as $table){
+                            $tableurl = $_SERVER['PHP_SELF'];
+                            $tableurl .= "?table_id=".$table['table_id'];
+                            if($table['status'] == 0){
+                                echo "<a class='table-not-booked' href ='$tableurl'>";
+                                echo "<span>";
+                                echo $table['number'];
+                                echo "</span>";
+                                echo "</a>";
+                            }elseif ($table['status'] == 1){
+                                echo "<a class='table-booked' href ='$tableurl'>";
+                                echo "<span>";
+                                echo $table['number'];
+                                echo "</span>";
+                                echo "</a>";
+                            }else{
+                                echo "<a class='table-received' href ='$tableurl'>";
+                                echo "<span>";
+                                echo $table['number'];
+                                echo "</span>";
+                                echo "</a>";
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php if(isset($_GET['reserve'])):?>
+                    <form method="post" action="" class="form-reserve">
+                        <label class="form-reserve-label">Thông tin đặt bàn</label>
+                        <div class="table-reserve-group">
+                            <label>Tên khách hàng:</label>
+                            <input type="text" name="customer_name" required>
+                        </div>
+                        <div class="table-reserve-group">
+                            <label>Số điện thoại:</label>
+                            <input type="text" name="phone" required>
+                        </div>
+                        <div class="table-reserve-group">
+                            <label>Số người:</label>
+                            <input type="text" name="number_people" required>
+                        </div>
+                        <div class="table-reserve-group">
+                            <label>Thời gian đặt:</label>
+                            <input type="datetime-local" name="time_reserve" required>
+                        </div>
+                        <div class="table-reserve-checkbox">
+                            <label>Danh sách bàn:</label>
+                            <div class="table-checkbox">
+                            <?php
+                            foreach ($tables as $table){
+                                if($table['status'] == 0){
+                                    $id = $table['table_id'];
+                                    echo "<div class='table-checkbox-input'>";
+                                    echo "<input type='checkbox' name='$id' value='$id' >";
+                                    echo "<span>";
+                                    echo $table['number'];
+                                    echo "</span>";
+                                    echo "</div>";
+                                }
+                            }
+                            ?>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-reserve" name="reserve_table">Đặt bàn</button>
+                    </form>
+                <?php else:?>
+                <div class="table-detail">
+                    <label class="detail-label">
+                        Bàn số
+                        <?php echo $currenttable[0]['number']?>
+                    </label>
+                    <div class="table-detail-group">
+                        <label class="infor-label">Bàn số: </label>
+                        <span> <?php echo $currenttable[0]['number']?></span>
+                    </div>
+                    <?php if($currenttable[0]['status'] == 0):?>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Trạng thái: </label>
+                            <span>Chưa đặt</span>
+                        </div>
+                    <?php elseif ($currenttable[0]['status'] == 1):?>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Trạng thái: </label>
+                            <span>Đã đặt</span>
+                        </div>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Tên khách hàng: </label>
+                            <span> <?php echo $currenttable[0]['customer_name']?></span>
+                        </div>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Số điện thoại: </label>
+                            <span> <?php echo $currenttable[0]['phone']?></span>
+                        </div>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Số người: </label>
+                            <span> <?php echo $currenttable[0]['number_people']?></span>
+                        </div>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Thời gian đặt: </label>
+                            <span> <?php echo $currenttable[0]['time_reserve']?></span>
+                        </div>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Các bàn đặt cùng: </label>
+                            <span>
+                                <?php
+                                $numgrouptable = count($grouptable);
+                                foreach ($grouptable as $key => $table){
+                                    if($key == $numgrouptable-1){
+                                        echo $table['number'].".";
+                                    }else{
+                                        echo $table['number'].", ";
+                                    }
+                                }
+                                ?>
+                            </span>
+                        </div>
+                        <div class="table-detail-btn">
+                            <button class="btn-update-reserve">Chỉnh sửa thông tin</button>
+                            <button class="btn-cancle-reserve">Hủy đặt bàn</button>
+                        </div>
+                    <?php elseif ($currenttable[0]['status'] == 2): ?>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Trạng thái: </label>
+                            <span>Đang sử dụng</span>
+                        </div>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Tên khách hàng: </label>
+                            <span> <?php echo $currenttable[0]['customer_name']?></span>
+                        </div>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Số điện thoại: </label>
+                            <span> <?php echo $currenttable[0]['phone']?></span>
+                        </div>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Số người: </label>
+                            <span> <?php echo $currenttable[0]['number_people']?></span>
+                        </div>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Thời gian đặt: </label>
+                            <span> <?php echo $currenttable[0]['time_reserve']?></span>
+                        </div>
+                        <div class="table-detail-group">
+                            <label class="infor-label">Các bàn đặt cùng: </label>
+                            <span>
+                                <?php
+                                $numgrouptable = count($grouptable);
+                                foreach ($grouptable as $key => $table){
+                                    if($key == $numgrouptable-1){
+                                        echo $table['number'].".";
+                                    }else{
+                                        echo $table['number'].", ";
+                                    }
+                                }
+                                ?>
+                            </span>
+                        </div>
+                    <?php endif;?>
+                </div>
+                <?php endif;?>
+            </div>
+            
         </content>
     </div>
 </div>
