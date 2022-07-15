@@ -5,6 +5,28 @@ CREATE TABLE `staff`(
     `password` varchar(256) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `event`(
+    `event_id` int not null primary key auto_increment,
+    `event_name` varchar(256) not null ,
+    `description` varchar(512) not null ,
+    `poster` varchar(512),
+    `status` int not null ,
+    `time_start` date not null ,
+    `time_end` date not null ,
+    `discount_rate` int
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `dish`(
+    `dish_id` int not null primary key auto_increment,
+    `category` varchar(256),
+    `description` varchar(512),
+    `create_time` date not null ,
+    `name` varchar(256) not null ,
+    `price` int not null ,
+    `image` varchar(512)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `bill`(
     `bill_id` int not null primary key auto_increment,
     `event_id` int,
@@ -26,16 +48,6 @@ CREATE TABLE `table`(
     FOREIGN KEY (`bill_id`) REFERENCES bill(`bill_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `dish`(
-    `dish_id` int not null primary key auto_increment,
-    `category` varchar(256),
-    `description` varchar(512),
-    `create_time` date not null ,
-    `name` varchar(256) not null ,
-    `price` int not null ,
-    `image` varchar(512)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE `bill_dish`(
     `bill_id` int not null ,
     `dish_id` int not null ,
@@ -44,14 +56,4 @@ CREATE TABLE `bill_dish`(
     FOREIGN KEY (`dish_id`) REFERENCES dish(`dish_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `event`(
-    `event_id` int not null primary key auto_increment,
-    `event_name` varchar(256) not null ,
-    `description` varchar(512) not null ,
-    `poster` varchar(512),
-    `status` int not null ,
-    `time_start` date not null ,
-    `time_end` date not null ,
-    `discount_rate` int
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
