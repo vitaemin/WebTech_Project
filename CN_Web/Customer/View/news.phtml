@@ -1,0 +1,78 @@
+<?php
+
+use Controller\EventController;
+
+$eventController = new EventController();
+$events = $eventController->getAllEvent();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/news.css
+    " />
+		<script
+			src="https://kit.fontawesome.com/48b5735cbc.js"
+			crossorigin="anonymous"
+		></script>
+		<title>Food Store</title>
+	</head>
+	<body>
+		<div class="top-bar">
+			<img
+				src="https://static.vecteezy.com/system/resources/previews/000/656/608/original/vector-restaurant-badge-and-logo-good-for-print.jpg"
+				alt="logo"
+			/>
+			<div class="navbar">
+				<a href="index.php">Trang chủ</a>
+				<a href="intro.php">Giới thiệu</a>
+				<a href="order.php">Đặt bàn</a>
+				<a href="menu.php">Thực đơn</a>
+				<a class="pressing-btn" href="#">Tin tức</a>
+				<a href="contact.php">Liên hệ</a>
+			</div>
+      <i class="fa-solid fa-bars" onclick="toggleMenu();"></i>
+		</div>
+
+    <div class="wrap">
+      <div class="main-content">
+        <?php
+          foreach ($events as $event) {
+            echo "<div class='col-content'>         
+                    <div class='img-box'>
+                      <img src='".$event['image_link']."'/>
+                    </div> 
+                    <div class='text-box'>
+                      <h3>".$event['title']."</h3>
+                      <p>".$event['description']."</p>
+                    </div>          
+                  </div>";
+          }
+        ?>
+      </div>
+
+      <div class="side-content">
+        <div><input type="text" placeholder="Search..."><i class="fa-solid fa-magnifying-glass"></i></div>
+        <h2>Bài viết mới</h2>
+        <?php
+          foreach ($events as $event) {
+            echo "<p>".$event['title']."</p>";
+          }
+        ?>
+        <h2>Chuyên mục</h2>
+        <h4>Tin tức</h4>
+      </div>
+    </div>
+
+    <script>
+			const toggleMenu = () => {
+				const menu = document.querySelector('.navbar');
+				if (menu.style.visibility == 'hidden') menu.style.visibility = 'visible';
+				else menu.style.visibility = 'hidden';
+			}
+		</script>
+  </body>
+</html>
