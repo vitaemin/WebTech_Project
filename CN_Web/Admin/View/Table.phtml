@@ -39,6 +39,7 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
 <div class = "page">
     <header class="header-wrapper">
         <div class="header-group">
+            <button class="btn-open-sidebar" onclick="openSide()">☰</button>
             <label> Tên nhà hàng</label>
         </div>
 
@@ -49,8 +50,10 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
             </span>
         </div>
     </header>
-    <div class="container">
-        <aside class="sidebar-wrapper">
+
+    <div id="container" class="container">
+        <aside id="sidebar" class="sidebar-wrapper">
+            <label>Danh mục quản lý</label>
             <a href="#" class="sidebar-link active">
                 <i class="fa-solid fa-table"></i>
                 Quản lý Bàn
@@ -73,17 +76,43 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
             </a>
         </aside>
 
-        <content class="content-wrapper">
+        <content id="content-wrapper" class="content-wrapper">
             <nav class="content-nav">
+                <a href="
                 <?php
-                $reservetableurl = $_SERVER['PHP_SELF'];
-                $reservetableurl .= "?reserve";
-                echo "<a href='$reservetableurl' class='reserveurl'>";
-                echo "Đặt bàn";
-                echo "</a>";
-                ?>
+                $reserve_table_url = $_SERVER['PHP_SELF'];
+                $reserve_table_url .= "?reserve";
+                echo $reserve_table_url;
+                ?>"
+                   class="reserve-url"
+                >
+                    Đặt bàn
+                </a>
+
+                <a href="
+                <?php
+                $add_table_url = $_SERVER['PHP_SELF'];
+                $add_table_url .= "?add_table";
+                echo $add_table_url;
+                ?>"
+                   class="add-table-url"
+                >
+                    Thêm bàn
+                </a>
+
+                <a href="
+                <?php
+                $deleta_table_url = $_SERVER['PHP_SELF'];
+                $deleta_table_url .= "?delete_table";
+                echo $deleta_table_url;
+                ?>"
+                   class="delete-table-url"
+                >
+                    Xóa bàn
+                </a>
             </nav>
             <div class="table-wrapper">
+<!--------------------------table-list-start-------------------------->
                 <div class="content-table">
                     <div class="table-note">
                         <div class="table-note-group">
@@ -127,33 +156,89 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
                         ?>
                     </div>
                 </div>
-                <?php if(isset($_GET['reserve'])):?>
+                <!--------------------------table-list-end-------------------------->
+
+                <?php if (isset($_GET['add_table'])):?>
+                    <!-----------------------------------form-add-table-start------------------->
+                    <form method="post" action="" class="form-add-table">
+                        <label class="form-add-table-label">Thông tin bàn</label>
+                        <div class="form-add-table-group">
+                            <label>Số bàn:</label>
+                            <input type="text" name="number" required>
+                        </div>
+                        <span class="error">
+                        <?php
+                        if(isset($_SESSION["err"])){
+                            echo "*".$_SESSION["err"];
+                            unset($_SESSION['err']);
+                        }
+                        ?>
+                        </span>
+                        <div class="group-btn">
+                            <button type="submit" class="btn-add-table" name="add_table">Thêm bàn</button>
+                            <button type="reset" class="btn-cancel">Hủy bỏ</button>
+                        </div>
+                    </form>
+                    <!-----------------------------------form-add-table-start------------------->
+                <?php elseif (isset($_GET['delete_table'])):?>
+                    <!-----------------------------------form-delete-table-start------------------->
+                    <form method="post" action="" class="form-delete-table">
+                        <label class="form-delete-table-label">Chọn bàn muốn xóa</label>
+                        <div class="form-checkbox">
+                            <?php
+                            foreach ($tables as $table){
+                                $id = $table['table_id'];
+                                echo "<div class='form-checkbox-input'>";
+                                echo "<input type='checkbox' name='$id' value='$id' >";
+                                echo "<span>";
+                                echo $table['number'];
+                                echo "</span>";
+                                echo "</div>";
+                            }
+                            ?>
+                        </div>
+                        <span class="error">
+                        <?php
+                        if(isset($_SESSION["err"])){
+                            echo "*".$_SESSION["err"];
+                            unset($_SESSION['err']);
+                        }
+                        ?>
+                        </span>
+                        <div class="group-btn">
+                            <button type="submit" class="btn-delete-table" name="delete_table">Xóa bàn</button>
+                        </div>
+                    </form>
+                    <!-----------------------------------form-delete-table-start------------------->
+
+                <?php elseif(isset($_GET['reserve'])):?>
+                    <!-----------------------------------form-reserve-start------------------->
                     <form method="post" action="" class="form-reserve">
                         <label class="form-reserve-label">Thông tin đặt bàn</label>
-                        <div class="table-reserve-group">
+                        <div class="form-reserve-group">
                             <label>Tên khách hàng:</label>
                             <input type="text" name="customer_name" required>
                         </div>
-                        <div class="table-reserve-group">
+                        <div class="form-reserve-group">
                             <label>Số điện thoại:</label>
                             <input type="text" name="phone" required>
                         </div>
-                        <div class="table-reserve-group">
+                        <div class="form-reserve-group">
                             <label>Số người:</label>
                             <input type="text" name="number_people" required>
                         </div>
-                        <div class="table-reserve-group">
+                        <div class="form-reserve-group">
                             <label>Thời gian đặt:</label>
                             <input type="datetime-local" name="time_reserve" required>
                         </div>
-                        <div class="table-reserve-checkbox">
+                        <div class="form-reserve-checkbox">
                             <label>Danh sách bàn:</label>
-                            <div class="table-checkbox">
+                            <div class="form-checkbox">
                             <?php
                             foreach ($tables as $table){
                                 if($table['status'] == 0){
                                     $id = $table['table_id'];
-                                    echo "<div class='table-checkbox-input'>";
+                                    echo "<div class='form-checkbox-input'>";
                                     echo "<input type='checkbox' name='$id' value='$id' >";
                                     echo "<span>";
                                     echo $table['number'];
@@ -164,10 +249,16 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
                             ?>
                             </div>
                         </div>
-                        <button type="submit" class="btn-reserve" name="reserve_table">Đặt bàn</button>
+                        <div class="group-btn">
+                            <button type="submit" class="btn-reserve" name="reserve_table">Đặt bàn</button>
+                            <button type="reset" class="btn-cancel">Hủy bỏ</button>
+                        </div>
                     </form>
+                    <!-----------------------------------form-reserve-end------------------->
+
                 <?php else:?>
-                <div class="table-detail">
+<!----------------------table-detail--------------------->
+                <div id="table-detail" class="table-detail">
                     <label class="detail-label">
                         Bàn số
                         <?php echo $currenttable[0]['number']?>
@@ -177,11 +268,15 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
                         <span> <?php echo $currenttable[0]['number']?></span>
                     </div>
                     <?php if($currenttable[0]['status'] == 0):?>
+                        <!-----------------------table-not-booked-detail-start----------------------->
                         <div class="table-detail-group">
                             <label class="infor-label">Trạng thái: </label>
                             <span>Chưa đặt</span>
                         </div>
+                        <!-----------------------table-not-booked-detail-end----------------------->
+
                     <?php elseif ($currenttable[0]['status'] == 1):?>
+                    <!-----------------------table-booked-detail-start----------------------->
                         <div class="table-detail-group">
                             <label class="infor-label">Trạng thái: </label>
                             <span>Đã đặt</span>
@@ -217,11 +312,13 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
                                 ?>
                             </span>
                         </div>
-                        <div class="table-detail-btn">
-                            <button class="btn-update-reserve">Chỉnh sửa thông tin</button>
-                            <button class="btn-cancle-reserve">Hủy đặt bàn</button>
+                        <div class="group-btn">
+                            <button id="btn-update-reserve" class="btn-update-reserve">Chỉnh sửa thông tin</button>
+                            <button id="btn-cancel-reserve" class="btn-cancel-reserve">Hủy đặt bàn</button>
                         </div>
+                        <!-----------------------table-booked-detail-end----------------------->
                     <?php elseif ($currenttable[0]['status'] == 2): ?>
+                    <!-----------------------table-received-detail-start----------------------->
                         <div class="table-detail-group">
                             <label class="infor-label">Trạng thái: </label>
                             <span>Đang sử dụng</span>
@@ -257,13 +354,145 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
                                 ?>
                             </span>
                         </div>
+                    <!-----------------------table-received-detail-end----------------------->
+
                     <?php endif;?>
                 </div>
+
+<!-----------------------table-booked-update-start----------------------->
+                <form id="form-update-reserve" class="form-update-reserve" method="post" action="">
+                    <label class="detail-label">
+                        Bàn số
+                        <?php echo $currenttable[0]['number']?>
+                    </label>
+                    <input type="hidden" name="table_id" value="<?php echo $currenttable[0]['table_id']?>">
+
+                    <div class="form-reserve-group">
+                        <label>Trạng thái: </label>
+                        <div class="form-reserve-radio">
+                            <input class="input-radio" type="radio" name="status" value="1" checked>
+                            <label>Đã đặt</label>
+                            <input class="input-radio" type="radio" name="status" value="2">
+                            <label>Đang sử dụng</label>
+                        </div>
+                    </div>
+                    <div class="form-reserve-group">
+                        <label>Tên khách hàng: </label>
+                        <input type="text" name="customer_name" value="<?php echo $currenttable[0]['customer_name']?>">
+                    </div>
+                    <div class="form-reserve-group">
+                        <label>Số điện thoại: </label>
+                        <input type="text" name="phone" value="<?php echo $currenttable[0]['phone']?>">
+                    </div>
+                    <div class="form-reserve-group">
+                        <label>Số người: </label>
+                        <input type="number" name="number_people" value="<?php echo $currenttable[0]['number_people']?>">
+                    </div>
+                    <div class="form-reserve-group">
+                        <label>Thời gian đặt: </label>
+                        <input type="datetime-local" name="time_reserve" value="<?php echo $currenttable[0]['time_reserve']?>">
+                    </div>
+                    <div class="form-reserve-checkbox">
+                        <label>Các bàn đặt cùng: </label>
+                        <div class="form-checkbox">
+                            <?php
+                            foreach ($tables as $table){
+                                $id = $table['table_id'];
+                                $booked = 0;
+                                foreach ($grouptable as $tablereserve){
+                                    if($id == $tablereserve['table_id']){
+                                        $booked = 1;
+                                        break;
+                                    }
+                                }
+                                if($table['status'] == 0 || $table['status'] == 1){
+                                    if ($booked) {
+                                        echo "<div class='form-checkbox-input'>";
+                                        echo "<input type='checkbox' name='$id' value='$id' checked>";
+                                        echo "<span>";
+                                        echo $table['number'];
+                                        echo "</span>";
+                                        echo "</div>";
+                                    } else {
+                                        echo "<div class='form-checkbox-input'>";
+                                        echo "<input type='checkbox' name='$id' value='$id' >";
+                                        echo "<span>";
+                                        echo $table['number'];
+                                        echo "</span>";
+                                        echo "</div>";
+                                    }
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="group-btn">
+                        <button type="submit" name="update-reserve" class="btn-update">Xác nhận chỉnh sửa</button>
+                        <button type="reset" id = "btn-cancel-update" class="btn-cancel">Hủy cập nhật</button>
+                    </div>
+                </form>
+       <!-----------------------table-booked-update-end----------------------->
+
                 <?php endif;?>
             </div>
             
         </content>
     </div>
 </div>
+<!------------------------popup-confirm-start------------------------>
+<div id="popup-confirm-reserve" class="popup-confirm-reserve">
+    <form class="form-confirm-reserve" method="post" action="">
+        <div class="form-confirm-reserve-label">Xác nhận hủy toàn bộ bàn liên quan tới khách hàng</div>
+        <input type="hidden" name="cancel-reserve-all" value="<?php echo $currenttable[0]['table_id'];?>">
+        <div class="btn-confirm-group">
+            <button type="submit" class="btn-confirm-reserve-cancel">Xác nhận</button>
+            <button type="reset" id="btn-cancel-confirm-reserve" class="btn-cancel">Hủy bỏ</button>
+        </div>
+    </form>
+</div>
+<!------------------------popup-confirm-end------------------------>
+<script>
+    function openSide(){
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.add("sidebar-active") ;
+
+        window.addEventListener("mouseup", function(event) {
+            if (event.target != sidebar) {
+                sidebar.classList.remove("sidebar-active");
+            }
+        });
+
+        window.addEventListener("resize", () =>{
+            if(window.innerWidth > 414){
+                sidebar.classList.add("sidebar-active") ;
+            }
+        });
+    }
+    </script>
+<script>
+    const btn_update_reserve = document.getElementById("btn-update-reserve");
+    const btn_cancel_reserve = document.getElementById("btn-cancel-reserve");
+    const form_update_reserve = document.getElementById("form-update-reserve");
+    const table_detail = document.getElementById("table-detail");
+    const btn_cancel_update = document.getElementById("btn-cancel-update");
+    const popup_confirm_reserve = document.getElementById("popup-confirm-reserve");
+    const btn_cancel_confirm_reserve = document.getElementById("btn-cancel-confirm-reserve");
+
+    btn_update_reserve.onclick = function () {
+        table_detail.style.display = "none";
+        form_update_reserve.style.display = "block";
+    }
+    btn_cancel_update.onclick = function () {
+        table_detail.style.display = "block";
+        form_update_reserve.style.display = "none";
+    }
+    btn_cancel_reserve.onclick = function () {
+        popup_confirm_reserve.style.display = "block";
+    }
+    btn_cancel_confirm_reserve.onclick = function () {
+        popup_confirm_reserve.style.display = "none";
+    }
+
+</script>
 </body>
 </html>
