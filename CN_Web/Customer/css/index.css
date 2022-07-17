@@ -1,0 +1,568 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.top-bar {
+	width: 100%;
+	height: 16vh;
+	background-color: black;
+	position: relative;
+}
+
+.top-bar img {
+	min-width: 10vw;
+	height: 16vh;
+	position: absolute;
+	top: 0;
+	left: 5%;
+}
+
+.navbar {
+	display: flex;
+	position: absolute;
+	right: 5%;
+	top: 6vh;
+	font-size: 20px;
+}
+
+.navbar a {
+	text-decoration: none;
+	padding: 0 20px;
+	color: white;
+}
+
+.navbar .pressing-btn {
+	color: yellow;
+}
+
+.navbar a:hover {
+	color: yellow;
+}
+
+.top-bar i {
+	color: white;
+	display: none;
+}
+
+.intro-img {
+	width: 100%;
+	height: 120vh;
+}
+
+.intro-food {
+	position: relative;
+}
+
+.intro-food:hover .i-1stl,
+.intro-food:hover .i-1str {
+	visibility: visible;
+	cursor: pointer;
+}
+
+.intro-food > img {
+	width: 100%;
+	height: 90vh;
+	overflow: hidden;
+	/* display: none; */
+}
+
+.i-1stl {
+	position: absolute;
+	top: 50%;
+	left: 5%;
+	color: white;
+	font-size: 25px;
+	visibility: hidden;
+}
+
+.i-1str {
+	position: absolute;
+	top: 50%;
+	right: 5%;
+	color: white;
+	font-size: 25px;
+	visibility: hidden;
+}
+
+.i-1stl:hover,
+.i-1str:hover {
+	color: rgb(225, 225, 81);
+}
+
+.intro-price {
+	text-align: center;
+}
+
+.intro-price > img {
+	width: 100%;
+	height: 20vh;
+	overflow: hidden;
+	/* display: none; */
+}
+
+.bbq {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 0 40px 0;
+}
+
+.text-box {
+	width: 40%;
+	padding-left: 10px;
+}
+
+.text-box h1 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.text-box p {
+	text-align: left;
+	line-height: 20px;
+}
+
+.img-box {
+	width: 25%;
+	height: 200px;
+	overflow: hidden;
+	margin: 0 10px;
+}
+
+.img-box img {
+	transition: transform 0.6s;
+	width: 100%;
+}
+
+.bbq img:hover {
+	transform: scale(1.3);
+}
+
+.menu {
+	display: flex;
+	justify-content: center;
+	background-color: black;
+	padding: 40px;
+}
+
+.text-box-2 {
+	width: 40%;
+	color: gray;
+}
+
+.img-box-2 {
+	width: 40%;
+}
+
+.text-box-2 h1 {
+	color: white;
+	padding: 20px 0 30px 0;
+}
+
+.text-box-2 p {
+	font-size: 18px;
+	padding: 0 0 20px 0;
+}
+
+.text-box-2 button {
+	background-color: black;
+	color: grey;
+	font-size: 15px;
+	padding: 10px 20px;
+	border: 2px solid grey;
+	border-radius: 5px;
+}
+
+.text-box-2 button:hover {
+	background-color: white;
+	color: #666;
+	cursor: pointer;
+}
+
+.fa-bag-shopping {
+	margin-right: 5px;
+}
+
+.img-box-2 img {
+	width: 49%;
+	height: 49%;
+	padding: 10px 20px;
+	filter: grayscale(100%);
+	transition: filter 0.6s;
+}
+
+.img-box-2 img:hover {
+	filter: grayscale(0%);
+}
+
+.restaurant {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.text-box-4 {
+	width: 35%;
+	margin-right: 40px;
+}
+
+.text-box-4 h1 {
+	margin: 20px 0;
+}
+
+.text-box-4 p,
+.text-box-4 button {
+	color: #777;
+	font-size: 18px;
+	padding: 0 0 20px 0;
+}
+
+.text-box-4 button {
+	font-size: 16px;
+	background-color: white;
+	padding: 8px 16px;
+	border-radius: 8px;
+	border: 2px solid #777;
+	transition: 0.6s;
+	margin-bottom: 10px;
+}
+
+.text-box-4 button:hover {
+	border-color: white;
+	cursor: pointer;
+}
+
+.fa-magnifying-glass {
+	margin-right: 5px;
+}
+
+.img-box-4 {
+	width: 40%;
+	height: 100%;
+}
+
+.img-box-4 img {
+	width: 49%;
+	height: 90%;
+	margin-top: 3%;
+	padding-right: 20px;
+	overflow: hidden;
+}
+
+.sign-up {
+	width: 100%;
+	background-image: url('https://homebbq.thietkewebsitemienphi.com/wp-content/uploads/2018/02/SLIDER2.jpg');
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 30px 0;
+}
+
+.sign-up p {
+	color: white;
+	font-size: 20px;
+	margin-right: 40px;
+}
+
+.sign-up input {
+	background-color: rgba(255, 255, 255, 0.2);
+	color: white;
+	border: none;
+	border-radius: 15px;
+	font-size: 15px;
+	height: 30px;
+	margin-right: 20px;
+	padding: 10px;
+}
+
+.sign-up button {
+	height: 30px;
+	border-radius: 8px;
+	background-color: rgb(244, 244, 111);
+	padding: 0 5px;
+	transition: background-color 0.6s;
+}
+
+.sign-up button:hover {
+	background-color: rgb(175, 175, 70);
+	cursor: pointer;
+}
+
+.cousin {
+	width: 100%;
+}
+
+.top-cousin {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.img-box-5 {
+	width: 40%;
+}
+
+.img-box-5 img {
+	width: 90%;
+	height: 90%;
+	margin-top: 20px;
+	margin-left: 35px;
+}
+
+.text-box-5 {
+	width: 40%;
+	margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.text-box-5 h1 {
+	font-size: 44px;
+	margin: 20px 0;
+}
+
+.text-box-5 p {
+	font-size: 16px;
+	line-height: 22px;
+	padding: 0 0 20px 0;
+	color: #777;
+}
+
+.bottom-cousin {
+	text-align: center;
+}
+
+.bottom-cousin img {
+	display: inline-block;
+	height: 25vh;
+	width: 18%;
+	margin-right: 10px;
+}
+
+.order {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgb(18, 17, 17);
+	padding: 30px 0;
+}
+
+.text-box-3 {
+	width: 40%;
+	margin-right: 20px;
+	color: white;
+}
+
+.text-box-3 h1 {
+	font-size: 38px;
+}
+
+.text-box-3 p {
+	margin: 10px 0;
+	font-size: 16px;
+}
+
+.text-box-3 .no-num {
+	margin: 20px 0;
+}
+
+.i-2nd {
+	color: rgb(91, 174, 32);
+}
+
+.infor {
+	width: 40%;
+}
+
+.infor input:not(.checkbox),
+.infor button {
+	display: block;
+}
+
+.infor input:not(.checkbox) {
+	margin: 0 0 15px 0;
+	font-size: 16px;
+	width: 80%;
+	padding: 10px 20px;
+}
+
+.checkbox {
+	margin-right: 3px;
+}
+
+.infor span {
+	color: white;
+	margin-right: 15px;
+}
+
+.infor button {
+	margin: 20px 0;
+	font-size: 16px;
+	background-color: rgb(225, 225, 81);
+	padding: 10px 20px;
+	border-radius: 8px;
+	transition: background-color 0.6s;
+}
+
+.infor button:hover {
+	background-color: rgb(175, 175, 70);
+	cursor: pointer;
+}
+
+.donor {
+	display: flex;
+	width: 100%;
+	height: 14vh;
+	justify-content: center;
+	align-items: center;
+}
+
+.donor img {
+	width: 6%;
+	height: 10vh;
+	margin: 5px;
+}
+
+@media screen and (max-width: 950px) {
+	.top-bar img {
+		left: 43%;
+	}
+
+	.top-bar i {
+		display: block;
+		font-size: 6vh;
+		position: absolute;
+		right: 0;
+		top: 6vh;
+		z-index: 3;
+	}
+
+	.navbar {
+		right: 0;
+		top: 0;
+		flex-direction: column;
+		width: 100vw;
+		height: 100vh;
+		justify-content: center;
+		align-items: center;
+		background-color: #333;
+		z-index: 2;
+		visibility: hidden;
+	}
+
+	.navbar a {
+		margin: 20px 0;
+	}
+
+	.bbq {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.text-box {
+		width: 80%;
+	}
+
+	.img-box {
+		width: 60%;
+		height: 40%;
+	}
+
+	.img-box img {
+		margin: 10px 0;
+	}
+
+	.menu {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.img-box-2,
+	.text-box-2 {
+		width: 80%;
+	}
+
+	.img-box-2 {
+		order: 2;
+	}
+
+	.img-box-2 img {
+		width: 90%;
+		margin-top: 10px;
+	}
+
+	.restaurant {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.img-box-4,
+	.text-box-4 {
+		width: 70%;
+	}
+
+	.img-box-4 img {
+		margin: 10px 0;
+	}
+
+	.sign-up {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.sign-up p,
+	.sign-up input,
+	.sign-up button {
+		margin: 10px 0;
+		text-align: center;
+	}
+
+	.top-cousin {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.text-box-5 {
+		width: 70%;
+	}
+
+	.img-box-5 {
+		order: 2;
+		width: 70%;
+		height: 50vh;
+		text-align: center;
+	}
+
+	.img-box-5 img {
+		margin: 0 0 20px 0;
+	}
+
+	.bottom-cousin img {
+		width: 40%;
+		height: 30vh;
+		margin-bottom: 20px;
+	}
+
+	.order {
+		flex-direction: column;
+	}
+
+	.text-box-3 {
+		width: 70%;
+		margin-bottom: 20px;
+	}
+
+	.infor {
+		width: 70%;
+	}
+}

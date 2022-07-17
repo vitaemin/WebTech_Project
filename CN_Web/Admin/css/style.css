@@ -25,7 +25,8 @@ body{
 }
 /*-----------------sidebar----------------*/
 .sidebar-wrapper{
-    min-height: 100vh;
+    /* min-height: 100vh; */
+    height: calc(100vh - 60px);
     width: 250px;
     background-color: #ddeefe;
 }

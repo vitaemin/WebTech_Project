@@ -1,0 +1,188 @@
+<?php
+
+namespace View\Event;
+use Controller\EventController;
+
+session_start();
+if(isset($_SESSION["staff"])){
+    $staff = $_SESSION["staff"];
+//    var_dump($staff);
+}else{
+    header('Location: index.php');
+}
+
+$eventController = new EventController();
+$events = $eventController->getAllEvent();
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/Event.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <title>Admin Page</title>
+</head>
+<body>
+
+<div class = "page">
+    <header class="header-wrapper">
+        <div class="header-group">
+            <label> Tên nhà hàng</label>
+        </div>
+
+        <div class="header-group">
+            <i class='fa-solid fa-user icon-user'></i>
+            <span class="header-identity">
+                <?php #echo $staff[0]['name'];?>
+            </span>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar-wrapper">
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-table"></i>
+                Quản lý Bàn
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-money-bill"></i>
+                Quản lý Hóa đơn
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-utensils"></i>
+                Quản lý Món ăn
+            </a>
+            <a href="#" class="sidebar-link active">
+                <i class="fa-solid fa-calendar-check"></i>
+                Quản lý Sự kiện
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-chart-column"></i>
+                Thống kê kinh doanh
+            </a>
+        </aside>
+        <div class="content">
+          <div class="wrapper">
+            <button class="add-event" onclick="addEvent()">Add Event</button>
+            <div class="event-list">             
+                <?php
+                  echo "<table>
+                          <tr>
+                            <th class='title'>Title</th>
+                            <th class='description'>Description</th>
+                            <th class='img_link'>Image</th>
+                            <th class='changebtn'></th>
+                          </tr>";
+                  foreach ($events as $index => $event) {
+                    echo "<tr>";
+                    echo "<td>".$event['title']."</td>";
+                    echo "<td>".$event['description']."</td>";
+                    echo "<td><img src='".$event['image_link']."' /></td>";
+                    echo "<td>
+                            <button class='editbtn' onclick='editEvent(".$event['event_id'].")'>Edit</button>
+                            <button class='deletebtn' onclick='deleteEvent(".$event['event_id'].")'>Delete</button>
+                          </td>";
+                    echo "</tr>";
+                  }
+                  echo "</table>";
+                ?>
+            </div>
+          </div>
+          <div class="add-event-layout" id="event-form">
+            <div class="add-wrapper">
+                <button class="exit_add" onclick="exitAdd()">X</button>
+                <form action="./Event.php" method="POST">
+                      <div class="new" id="event-id">
+                        <label>Event Id:</label>
+                        <span id="event-id-to-edit"></span>
+                        <input type="text" id="eventId" name="eventId" style="visibility:hidden" />
+                      </div>
+                      <div class="new">
+                          <label for="title">Title</label>
+                          <input type="text" id="title" name="title" />
+                      </div>
+                      <div class="new">
+                          <label for="description">Description</label>
+                          <textarea id="description" name="description"></textarea>
+                      </div>
+                      <div class="new">
+                          <label for="img_link">Image Link</label>
+                          <input type="text" id="img_link" name="imgLink" />
+                      </div>
+                      <button class="agree-add" type="submit" name="add" id="addbtn">Add</button>
+                      <button class="agree-add" type="submit" name="update" id="updatebtn">Update</button>
+                </form>
+            </div>
+          </div>
+          <div class="add-event-layout" id="form-to-del">
+            <div class="add-wrapper">
+                <button class="exit_add" onclick="exitDel()">X</button>
+                <form action="./Event.php" method="POST"> 
+                    <input type="text" id="eventId2" name="eventId2" style="visibility:hidden" />
+                    <p>Bạn chắc chắn muốn xóa sự kiện này?</p>
+                    <button type="submit" class="agree-del" name="delete">OK</button>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function addEvent() {
+        const form = document.getElementById('event-form');
+        form.style.display = "block";
+        const eventId = document.getElementById('event-id');
+        eventId.style.display = "none";
+        const addBtn = document.getElementById('addbtn');
+        addBtn.style.display = "block";
+        const updateBtn = document.getElementById('updatebtn');
+        updateBtn.style.display = "none";
+    }
+
+    function exitAdd() {
+        const form = document.getElementById('event-form');
+        form.style.display = "none";
+    }
+
+    function editEvent(eid) {
+        const form = document.getElementById('event-form');
+        form.style.display = "block";
+        const eventId = document.getElementById('event-id');
+        eventId.style.display = "block";     
+        const addBtn = document.getElementById('addbtn');
+        addBtn.style.display = "none";
+        const updateBtn = document.getElementById('updatebtn');
+        updateBtn.style.display = "block";
+        const idDisplay = document.getElementById('event-id-to-edit');
+        idDisplay.innerText = eid;
+        const idNonDisplay = document.getElementById('eventId');
+        idNonDisplay.value = eid;
+
+        const title = document.getElementById('title');
+        title.placeholder = 'not changed';
+        const description = document.getElementById('description');
+        description.placeholder = 'not changed';
+        const imgLink = document.getElementById('img_link');
+        imgLink.placeholder = 'not changed';
+    }
+
+    function deleteEvent(eid) {
+        const form = document.getElementById('form-to-del');
+        form.style.display = "block";
+        const idNonDisplay = document.getElementById('eventId2');
+        idNonDisplay.value = eid;
+    }
+
+    function exitDel() {
+        const form = document.getElementById('form-to-del');
+        form.style.display = "none";
+    }
+</script>
+
+</body>
+</html>

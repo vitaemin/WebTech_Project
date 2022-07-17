@@ -1,0 +1,202 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.top-bar {
+	width: 100%;
+	height: 16vh;
+	background-color: black;
+	position: relative;
+}
+
+.top-bar img {
+	min-width: 10vw;
+	height: 16vh;
+	position: absolute;
+	top: 0;
+	left: 5%;
+}
+
+.top-bar i {
+	color: white;
+	display: none;
+}
+
+.navbar {
+	display: flex;
+	position: absolute;
+	right: 5%;
+	top: 6vh;
+	font-size: 20px;
+}
+
+.navbar a {
+	text-decoration: none;
+	padding: 0 20px;
+	color: white;
+}
+
+.navbar .pressing-btn {
+	color: yellow;
+}
+
+.navbar a:hover {
+	color: yellow;
+}
+
+.wrap {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.main-content {
+	width: 60%;
+	padding: 0 5%;
+	border-right: 1px solid #ddd;
+}
+
+.col-content {
+	display: flex;
+	align-items: center;
+	margin: 20px 0;
+}
+
+.img-box {
+	width: 40%;
+}
+
+.img-box img {
+	width: 100%;
+	height: auto;
+}
+
+.text-box {
+	width: 50%;
+	margin-left: 20px;
+}
+
+.text-box h3 {
+	margin-bottom: 10px;
+}
+
+.text-box h3::after {
+	content: '';
+	display: block;
+	margin: 5px 0;
+	width: 10%;
+	height: 2px;
+	background-color: #ddd;
+}
+
+.text-box p {
+	color: #777;
+}
+
+.side-content {
+	width: 30%;
+	margin-left: 30px;
+}
+
+.side-content div {
+	margin-top: 20px;
+}
+
+.side-content input,
+.side-content i {
+	font-size: 18px;
+	padding: 10px;
+}
+
+.side-content input {
+	border: 1px solid #ddd;
+	min-width: 150px;
+}
+
+.side-content i {
+	color: white;
+	background-color: black;
+	padding: 12px;
+	position: relative;
+	top: 0;
+	right: 5%;
+}
+
+.side-content h2 {
+	margin: 30px 0;
+}
+
+.side-content h2::after {
+	content: '';
+	display: block;
+	margin: 10px 0;
+	width: 10%;
+	height: 3px;
+	background-color: #ddd;
+}
+
+.side-content p {
+	margin: 10px 0;
+}
+
+.side-content p::after {
+	content: '';
+	display: block;
+	margin: 10px 0;
+	width: 70%;
+	height: 2px;
+	background-color: #ddd;
+}
+
+@media screen and (max-width:950px) {
+	.top-bar img {
+		left: 43%;
+	}
+
+	.top-bar i {
+		display: block;
+		font-size: 6vh;
+		position: absolute;
+		right: 0;
+		top: 6vh;
+		z-index: 3;
+	}
+
+	.navbar {
+		right: 0;
+		top: 0;
+		flex-direction: column;
+		width: 100vw;
+		height: 100vh;
+		justify-content: center;
+		align-items: center;
+		background-color: #333;
+		z-index: 2;
+		visibility: hidden;
+	}
+
+	.navbar a {
+		margin: 20px 0;
+	}
+
+	.wrap {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.main-content {
+		width: 90%;
+	}
+
+	.main-content {
+		border: none;
+	}
+
+	.side-content {
+		width: 80%;
+		margin: 0;
+	}
+}
