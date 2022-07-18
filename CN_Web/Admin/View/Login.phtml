@@ -31,10 +31,10 @@ session_start();
             <input type="password" class="form-control" name="password" placeholder="password">
             <span class="error">
                 <?php
-                if(isset($_SESSION["err"])){
-                    echo "*".$_SESSION["err"];
-                    unset($_SESSION['err']);
-                }
+                    if(isset($_SESSION["err"])){
+                        echo "*".$_SESSION["err"];
+                        unset($_SESSION['err']);
+                    }
                 ?>
             </span>
         </div>
