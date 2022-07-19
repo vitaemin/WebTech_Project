@@ -62,11 +62,11 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Dish.php" class="sidebar-link">
                 <i class="fa-solid fa-utensils"></i>
                 Quản lý Món ăn
             </a>
-            <a href="./Event.php" class="sidebar-link">
+            <a href="Event.php" class="sidebar-link">
                 <i class="fa-solid fa-calendar-check"></i>
                 Quản lý Sự kiện
             </a>
@@ -450,7 +450,7 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
         </div>
     </form>
 </div>
-<!------------------------popup-confirm-end------------------------>
+----------------------popup-confirm-end----------------------
 <script>
     function openSide(){
         const sidebar = document.getElementById("sidebar");
@@ -468,7 +468,8 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
             }
         });
     }
-    </script>
+</script>
+
 <script>
     const btn_update_reserve = document.getElementById("btn-update-reserve");
     const btn_cancel_reserve = document.getElementById("btn-cancel-reserve");
@@ -499,8 +500,6 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
             popup_confirm_reserve.style.display = "none";
         }
     }
-
-
 </script>
 </body>
 </html>

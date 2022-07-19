@@ -3,7 +3,7 @@
 include('./Model/Database/DBConnect.php');
 include('./Controller/DishController.php');
 include('./Model/Dish/DishModel.php');
-include('./Model/Dish/DishDb.phtml');
+include('./Model/Dish/DishDb.php');
 
 use Controller\DishController;
 $dishController = new DishController();

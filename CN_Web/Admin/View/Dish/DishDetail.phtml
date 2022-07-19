@@ -65,8 +65,9 @@ use Model\Dish\DishModel;
         </div>
     </header>
     <div class="container">
-        <aside class="sidebar-wrapper">
-            <a href="#" class="sidebar-link">
+        <aside id="sidebar" class="sidebar-wrapper">
+            <label>Danh mục quản lý</label>
+            <a href="Table.php" class="sidebar-link">
                 <i class="fa-solid fa-table"></i>
                 Quản lý Bàn
             </a>
@@ -74,15 +75,15 @@ use Model\Dish\DishModel;
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
-            <a href="#" class="sidebar-link <?php echo "active"?>">
+            <a href="" class="sidebar-link active">
                 <i class="fa-solid fa-utensils"></i>
                 Quản lý Món ăn
             </a>
-            <a href="#" class="sidebar-link ">
+            <a href="Event.php" class="sidebar-link">
                 <i class="fa-solid fa-calendar-check"></i>
                 Quản lý Sự kiện
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Report.php" class="sidebar-link">
                 <i class="fa-solid fa-chart-column"></i>
                 Thống kê kinh doanh
             </a>
@@ -139,5 +140,24 @@ use Model\Dish\DishModel;
         </content>
     </div>
 </div>
+<script>
+    function openSide(){
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.add("sidebar-active") ;
+
+        window.addEventListener("mouseup", function(event) {
+            if (event.target != sidebar) {
+                sidebar.classList.remove("sidebar-active");
+            }
+        });
+
+        window.addEventListener("resize", () =>{
+            if(window.innerWidth > 414){
+                sidebar.classList.add("sidebar-active") ;
+            }
+        });
+    }
+</script>
+
 </body>
 </html>

@@ -43,8 +43,9 @@ $events = $eventController->getAllEvent();
         </div>
     </header>
     <div class="container">
-        <aside class="sidebar-wrapper">
-            <a href="#" class="sidebar-link">
+        <aside id="sidebar" class="sidebar-wrapper">
+            <label>Danh mục quản lý</label>
+            <a href="Table.php" class="sidebar-link ">
                 <i class="fa-solid fa-table"></i>
                 Quản lý Bàn
             </a>
@@ -52,7 +53,7 @@ $events = $eventController->getAllEvent();
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Dish.php" class="sidebar-link">
                 <i class="fa-solid fa-utensils"></i>
                 Quản lý Món ăn
             </a>
@@ -60,7 +61,7 @@ $events = $eventController->getAllEvent();
                 <i class="fa-solid fa-calendar-check"></i>
                 Quản lý Sự kiện
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Report.php" class="sidebar-link">
                 <i class="fa-solid fa-chart-column"></i>
                 Thống kê kinh doanh
             </a>
@@ -131,6 +132,24 @@ $events = $eventController->getAllEvent();
         </div>
     </div>
 </div>
+<script>
+    function openSide(){
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.add("sidebar-active") ;
+
+        window.addEventListener("mouseup", function(event) {
+            if (event.target != sidebar) {
+                sidebar.classList.remove("sidebar-active");
+            }
+        });
+
+        window.addEventListener("resize", () =>{
+            if(window.innerWidth > 414){
+                sidebar.classList.add("sidebar-active") ;
+            }
+        });
+    }
+</script>
 
 <script>
     function addEvent() {

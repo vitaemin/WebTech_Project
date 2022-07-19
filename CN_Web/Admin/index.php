@@ -1,17 +1,15 @@
 <?php
 
-// include('./Model/Database/DBConnect.php');
-include('./Controller/DishController.php');
-// include('./Model/Dish/DishDb.php');
-include('./View/Dish/DishManagement.phtml');
-// include('./View/Dish/DishDetail.phtml');
+include('./Model/Database/DBConnect.php');
+include('./Controller/LoginController.php');
+include('./Model/Login/LoginDb.php');
+include('./View/Login.phtml');
 
-
-use Controller\DishController;
-$dishController = new DishController();
+use Controller\LoginController;
+$loginController = new LoginController();
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
-        $dishController->renderDish();
+        $loginController->renderLogin();
         break;
 
     case "POST":
