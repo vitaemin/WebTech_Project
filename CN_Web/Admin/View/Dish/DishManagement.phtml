@@ -55,13 +55,14 @@ use Model\Dish\DishModel;
 <div class = "page">
     <header class="header-wrapper">
         <div class="header-group">
+            <button class="btn-open-sidebar" onclick="openSide()">☰</button>
             <label> Tên nhà hàng</label>
         </div>
 
         <div class="header-group">
             <i class='fa-solid fa-user icon-user'></i>
             <span class="header-identity">
-                <?php echo "Chu Manh Tien"?>
+                <?php echo $staff[0]['name'];?>
             </span>
         </div>
     </header>
