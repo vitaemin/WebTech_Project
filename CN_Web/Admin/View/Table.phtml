@@ -70,7 +70,7 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
                 <i class="fa-solid fa-calendar-check"></i>
                 Quản lý Sự kiện
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Report.php" class="sidebar-link">
                 <i class="fa-solid fa-chart-column"></i>
                 Thống kê kinh doanh
             </a>
@@ -477,21 +477,29 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
     const btn_cancel_update = document.getElementById("btn-cancel-update");
     const popup_confirm_reserve = document.getElementById("popup-confirm-reserve");
     const btn_cancel_confirm_reserve = document.getElementById("btn-cancel-confirm-reserve");
+    if(btn_update_reserve != null){
+        btn_update_reserve.onclick = function () {
+            table_detail.style.display = "none";
+            form_update_reserve.style.display = "block";
+        }
+    }
+    if (btn_cancel_update != null){
+        btn_cancel_update.onclick = function () {
+            table_detail.style.display = "block";
+            form_update_reserve.style.display = "none";
+        }
+    }
+    if (btn_cancel_reserve != null){
+        btn_cancel_reserve.onclick = function () {
+            popup_confirm_reserve.style.display = "block";
+        }
+    }
+    if (btn_cancel_confirm_reserve != null){
+        btn_cancel_confirm_reserve.onclick = function () {
+            popup_confirm_reserve.style.display = "none";
+        }
+    }
 
-    btn_update_reserve.onclick = function () {
-        table_detail.style.display = "none";
-        form_update_reserve.style.display = "block";
-    }
-    btn_cancel_update.onclick = function () {
-        table_detail.style.display = "block";
-        form_update_reserve.style.display = "none";
-    }
-    btn_cancel_reserve.onclick = function () {
-        popup_confirm_reserve.style.display = "block";
-    }
-    btn_cancel_confirm_reserve.onclick = function () {
-        popup_confirm_reserve.style.display = "none";
-    }
 
 </script>
 </body>
