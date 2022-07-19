@@ -5,7 +5,7 @@ body{
 /*-----------------sidebar----------------*/
 .sidebar-wrapper{
     display: block;
-    min-height: 95vh;
+    height: calc(100vh - 60px);
     width: 200px;
     background-color: #ddeefe;
 }
