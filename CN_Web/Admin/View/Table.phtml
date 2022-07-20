@@ -37,17 +37,19 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
 <body>
 
 <div class = "page">
-    <header class="header-wrapper">
-        <div class="header-group">
-            <label> Tên nhà hàng</label>
-        </div>
+<header class="header-wrapper">
+        <label>BABA RESTO</label>
 
-        <div class="header-group">
+        <div class="header-group" onclick="handleClickOnUser()">
             <i class='fa-solid fa-user icon-user'></i>
             <span class="header-identity">
                 <?php echo $staff[0]['name'];?>
-            </span>
-        </div>
+                <div class="user-info" id="user-info">
+                    <p><a href="./ChangePasswordForm.php">Doi mat khau</a></p>
+                    <p><a href="./index.php">Dang xuat</a></p>
+                </div>
+            </span>          
+        </div>  
     </header>
     <div class="container">
         <aside class="sidebar-wrapper">
@@ -265,5 +267,17 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
         </content>
     </div>
 </div>
+<script>
+    function handleClickOnUser() {
+        const user = document.getElementById('user-info');
+        if (user.style.display == "none") {
+            user.style.display = "block";
+            document.getElementById('container').style.opacity = 0.3;
+            return;
+        }
+        user.style.display = "none";
+        document.getElementById('container').style.opacity = 1;
+    }
+</script>
 </body>
 </html>
