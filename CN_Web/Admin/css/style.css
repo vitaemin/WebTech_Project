@@ -1,7 +1,78 @@
 body{
     margin: 0;
 }
-
+/*---------------header--------------*/
+.header-wrapper{
+    z-index: 2;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #4e7eff;
+    color: #fff;
+}
+.header-wrapper label {
+    margin: auto 0 auto 10px;
+}
+.header-group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 15px;
+    cursor: pointer;
+}
+.header-group:hover {
+    background-color: #245efe;
+}
+.header-identity{
+    padding: 0px 5px;
+    position: relative;
+}
+.user-info {
+    display: none;
+    width: 100%;
+    position: absolute;
+    top: 56px;
+    right: 16px;
+    color: black;
+    background-color: #ddd;
+    padding: 2px 12px;
+    z-index: 3;
+}
+.user-info::before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-top: 0px solid;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 14px solid #29adff;
+    position: absolute;
+    top: -20%;
+    right: 65%;
+}
+.user-info p {
+    width: 100%;
+    background-color: #fff;
+    margin: 0;
+    padding: 5px 10px;
+    border: 1px solid #29adff;
+    position: relative;
+    left: -10px;
+    box-shadow: 2px 2px #29adff;
+    transition: transform 0.6s;
+}
+.user-info p:hover {
+    background-color: #ddd;
+    transform: translateX(10%);
+}
+.user-info a {
+    color: black;
+    text-decoration: none;
+}
+/*container*/
+.container{
+    display: flex;
+}
 /*-----------------sidebar----------------*/
 .sidebar-wrapper{
     display: block;

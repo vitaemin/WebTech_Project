@@ -43,12 +43,16 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
             <label> Tên nhà hàng</label>
         </div>
 
-        <div class="header-group">
+        <div class="header-group" onclick="handleClickOnUser()">
             <i class='fa-solid fa-user icon-user'></i>
             <span class="header-identity">
                 <?php echo $staff[0]['name'];?>
-            </span>
-        </div>
+                <div class="user-info" id="user-info">
+                    <p><a href="./ChangePasswordForm.php">Doi mat khau</a></p>
+                    <p><a href="./index.php">Dang xuat</a></p>
+                </div>
+            </span>          
+        </div>  
     </header>
 
     <div id="container" class="container">
@@ -439,6 +443,19 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
         </content>
     </div>
 </div>
+
+<script>
+    function handleClickOnUser() {
+        const user = document.getElementById('user-info');
+        if (user.style.display == "none") {
+            user.style.display = "block";
+            document.getElementById('container').style.opacity = 0.3;
+            return;
+        }
+        user.style.display = "none";
+        document.getElementById('container').style.opacity = 1;
+    }
+
 <!------------------------popup-confirm-start------------------------>
 <div id="popup-confirm-reserve" class="popup-confirm-reserve">
     <form class="form-confirm-reserve" method="post" action="">
@@ -450,7 +467,7 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
         </div>
     </form>
 </div>
-----------------------popup-confirm-end----------------------
+---------------------popup-confirm-end----------------------
 <script>
     function openSide(){
         const sidebar = document.getElementById("sidebar");
