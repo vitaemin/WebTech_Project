@@ -16,6 +16,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case "POST":
         if(isset($_POST['reserve_table'])){
             $tableController->reserveTable();
+        } elseif (isset($_POST['update-reserve'])){
+            $tableController->updateReserve();
+        } elseif (isset($_POST['cancel-reserve-all'])){
+            $tableController->cancelReserveAll();
+        } elseif (isset($_POST['add_table'])){
+            $tableController->addTable();
+        } elseif (isset($_POST['delete_table'])){
+            $tableController->deleteTable();
         }
         break;
     default:
