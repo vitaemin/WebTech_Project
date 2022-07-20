@@ -3,8 +3,10 @@
 namespace View\Dish;
 use Controller\DishController;
 use Model;
-use Model\Dish\DishModel;
-// include 'C:/xampp/WebTechEServices/WebTech_Project/CN_Web/Admin/Model/Dish/DishModel.php';
+// use Model\Dish\DishModel;
+
+$dishController = new DishController();
+$listDishes = $dishController->getAllDish();
 
 // session_start();
 // if(isset($_SESSION["staff"])){
@@ -25,18 +27,6 @@ use Model\Dish\DishModel;
 // $grouptable = $tableController->getTableByOtherTable($table_id);
 ?>
 
-<?php 
-    // include('/xampp/htdocs/WebTechEServices/WebTech_Project/CN_Web/Admin/Model/Dish/DishModel.php');
-
-    $dish_1 = new DishModel(
-        '001', 
-        'mon_chinh', 
-        'Beaf Steak thịt bò Kobe Phiên bản Mỹ Đình',
-        'Ba chỉ bò Mỹ là thịt ba chỉ của con bò ở Mỹ',
-        '169000',
-        'https://cdn.shopify.com/s/files/1/2128/4095/products/Beef-Sirlion1_d64f721b-db11-4adf-ab7f-69c7d534fb4d_600x.jpg?v=1581030208'
-    );
-?>
 
 <!doctype html>
 <html lang="en">
@@ -98,20 +88,21 @@ use Model\Dish\DishModel;
                     // echo "Trở lại";
                     // echo "</a>";
                 ?>
-                <a href="#" class="dish-button dish-button-return">
+                <!-- <a href="#" class="dish-button dish-button-return">
                     Trở lại              
-                </a>
-                <span class="dish-management-title">Danh sách món ăn</span>
+                </a> -->
                 <form  action="./Dish.php" method="POST">
-                    <button type="submit" name="add_button" class="dish-button dish-button-add"> 
+                    <button type="submit" name="button_add" class="dish-button dish-button-add"> 
                         <i class="fa-regular fa-square-plus"></i>
                         Thêm món ăn   
                     </button>  
                 </form>
+                <div class="dish-management-title">Danh sách món ăn</d>
+                
             </nav>
             <div class="content-main">
                 <div class="search-filter-bar">
-                    <div class="row">
+                    <div class="row search-filter">
                         <div class="search-bar">
                             <form class="search-form">
                                 <input type="search" placeholder="search">
@@ -142,178 +133,72 @@ use Model\Dish\DishModel;
                 </div>
                 <div class="list-dish">
                     <div class="row list-dish-body">
-                        <!-- 1 -->
-                        <div class="dish-card-wrap">
-                            <div class="dish-card-product">
-                                <a class="dish-img-wrap" href="">
-                                    <img src="<?php echo $dish_1->getImageUrl()?>">
-                                </a>
-                                <div class="dish-info-wrap">
-                                    <a class="dish-title" title="<?php echo $dish_1->getName()?>" href="">
-                                        <?php echo $dish_1->getName() ?>
-                                    </a>
-                                    <div class="dish-price">
-                                        Giá: <?php echo $dish_1->getPrice() ?> <sup>vnđ</sup>
-                                    </div>
-                                    <div class="dish-category">
-                                        <?php echo '#'.$dish_1->getCategory() ?>
-                                    </div>
-                                    <div class="row dish-list-action">
-                                        <form title="Xem" action="Dish.php" method="GET">
-                                            <button class="dish-view" name="button_view" type="submit">
-                                                <i class="fa-solid fa-eye"></i>  
-                                            </button>
-                                        </form>
-                                        <form  title="Sửa" action="Dish.php" method="POST">
-                                            <button class="dish-edit" name="button_edit" type="submit">
-                                                <i class="fa-solid fa-pen-to-square"></i>  
-                                            </button>
-                                        </form>
-                                        <form  title="Xóa">
-                                            <button class="dish-delete">
-                                                <i class="fa-solid fa-eraser"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                            foreach($listDishes as $dishItem) {
+                                $category_color="red";
+                                if ($dishItem['category'] == 'trang_mieng') {
+                                    $category_color = "blue";
+                                } else if ($dishItem['category'] == 'trang_mieng') {
+                                    $category_color = "green";
+                                }
+                                echo "
+                                    <div class='dish-card-wrap'>
+                                        <div class='dish-card-product'>
+                                            <a class='dish-img-wrap' href=''>
+                                                <img src=".$dishItem['image_url'].">
+                                            </a>
+                                          
+                                            <div class='dish-info-wrap'>
+                                                <a class='dish-title' title=".$dishItem['name']." href=''>
+                                                    ".$dishItem['name']."
+                                                </a>
+                                                <div class='dish-price'>
+                                                    Giá: ".$dishItem['price']. "<sup>vnđ</sup>
+                                                </div>
+                                                <div class='dish-category'>
+                                                    #".$dishItem['category']."
+                                                </div>
+                                                
+                                                <div class='row dish-list-action'>
+                                                    <form title='Xem' action='Dish.php' method='GET'>
+                                                        <input style='display:none' type='number' name='dish_id' value='".$dishItem['dish_id']."'>
+                                                        <button class='dish-view' name='button_view' type='submit'>
+                                                            <i class='fa-solid fa-eye'></i>  
+                                                        </button>
+                                                    </form>
+                                                    <form title='Sửa' action='Dish.php' method='GET'>
+                                                        <input style='display:none' type='number' name='dish_id' value='".$dishItem['dish_id']."'>
+                                                        <button class='dish-edit' name='button_edit' type='submit'>
+                                                            <i class='fa-solid fa-pen-to-square'></i>  
+                                                        </button>
+                                                    </form>
+                                                    <div title='Xóa'>
+                                                        <button class='dish-delete' onclick='showFormConfirm(".$dishItem['dish_id'].")'>
+                                                            <i class='fa-solid fa-eraser'></i>
+                                                        </button>
+                                                    </div>
+                                                  
 
-                        <!-- 2 -->
-                        <div class="dish-card-wrap">
-                            <div class="dish-card-product">
-                                <a class="dish-img-wrap" href="">
-                                    <img src="<?php echo $dish_1->getImageUrl()?>">
-                                </a>
-                                <div class="dish-info-wrap">
-                                    <a class="dish-title" title="<?php echo $dish_1->getName()?>" href="">
-                                        <?php echo $dish_1->getName() ?>
-                                    </a>
-                                    <div class="dish-price">
-                                        Giá: <?php echo $dish_1->getPrice() ?> <sup>vnđ</sup>
-                                    </div>
-                                    <div class="row dish-list-action">
-                                        <form title="Xem">
-                                            <button class="dish-view" >
-                                                <i class="fa-solid fa-eye"></i>  
-                                            </button>
-                                        </form>
-                                        <form  title="Sửa">
-                                            <button class="dish-edit">
-                                                <i class="fa-solid fa-pen-to-square"></i>  
-                                            </button>
-                                        </form>
-                                        <form  title="Xóa">
-                                            <button class="dish-delete">
-                                                <i class="fa-solid fa-eraser"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                                </div>
 
-                        <!-- 3 -->
-                        <div class="dish-card-wrap">
-                            <div class="dish-card-product">
-                                <a class="dish-img-wrap" href="">
-                                    <img src="<?php echo $dish_1->getImageUrl()?>">
-                                </a>
-                                <div class="dish-info-wrap">
-                                    <a class="dish-title" title="<?php echo $dish_1->getName()?>" href="">
-                                        <?php echo $dish_1->getName() ?>
-                                    </a>
-                                    <div class="dish-price">
-                                        Giá: <?php echo $dish_1->getPrice() ?> <sup>vnđ</sup>
-                                    </div>
-                                    <div class="row dish-list-action">
-                                        <form title="Xem">
-                                            <button class="dish-view" >
-                                                <i class="fa-solid fa-eye"></i>  
-                                            </button>
-                                        </form>
-                                        <form  title="Sửa">
-                                            <button class="dish-edit">
-                                                <i class="fa-solid fa-pen-to-square"></i>  
-                                            </button>
-                                        </form>
-                                        <form  title="Xóa">
-                                            <button class="dish-delete">
-                                                <i class="fa-solid fa-eraser"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 4 -->
-                        <div class="dish-card-wrap">
-                            <div class="dish-card-product">
-                                <a class="dish-img-wrap" href="">
-                                    <img src="<?php echo $dish_1->getImageUrl()?>">
-                                </a>
-                                <div class="dish-info-wrap">
-                                    <a class="dish-title" title="<?php echo $dish_1->getName()?>" href="">
-                                        <?php echo $dish_1->getName() ?>
-                                    </a>
-                                    <div class="dish-price">
-                                        Giá: <?php echo $dish_1->getPrice() ?> <sup>vnđ</sup>
-                                    </div>
-                                    <div class="row dish-list-action">
-                                        <form title="Xem">
-                                            <button class="dish-view" >
-                                                <i class="fa-solid fa-eye"></i>  
-                                            </button>
-                                        </form>
-                                        <form  title="Sửa">
-                                            <button class="dish-edit">
-                                                <i class="fa-solid fa-pen-to-square"></i>  
-                                            </button>
-                                        </form>
-                                        <form  title="Xóa">
-                                            <button class="dish-delete">
-                                                <i class="fa-solid fa-eraser"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 5 -->
-                        <div class="dish-card-wrap">
-                            <div class="dish-card-product">
-                                <a class="dish-img-wrap" href="">
-                                    <img src="<?php echo $dish_1->getImageUrl()?>">
-                                </a>
-                                <div class="dish-info-wrap">
-                                    <a class="dish-title" title="<?php echo $dish_1->getName()?>" href="">
-                                        <?php echo $dish_1->getName() ?>
-                                    </a>
-                                    <div class="dish-price">
-                                        Giá: <?php echo $dish_1->getPrice() ?> <sup>vnđ</sup>
-                                    </div>
-                                    <div class="row dish-list-action">
-                                        <form title="Xem">
-                                            <button class="dish-view" >
-                                                <i class="fa-solid fa-eye"></i>  
-                                            </button>
-                                        </form>
-                                        <form  title="Sửa">
-                                            <button class="dish-edit">
-                                                <i class="fa-solid fa-pen-to-square"></i>  
-                                            </button>
-                                        </form>
-                                        <form  title="Xóa">
-                                            <button class="dish-delete">
-                                                <i class="fa-solid fa-eraser"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                                <div class='popup' id='confirm-form'>
+                                                    <form class='popup-form' action='Dish.php' method='POST'>
+                                                        <div class='popup-title'>Bạn có muốn Xóa món ăn này không ?</div>
+                                                        <div class='popup-button-x' onclick='hideForm()'>X</div>
+                                                        <div class='popup-button-group'>
+                                                            <button type='submit' class='popup-button button-yes' name='button_delete'>Có</button>
+                                                            <div class='popup-button button-no' onclick='hideForm()'>Không</div>
+                                                        </div>
+                                                       
+                                                        <input style='display:none' type='number' name='dish_delete_id' id='input_delete_id'>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>";
+                            } 
+                        ?>
+                        
                     </div>
                     <div class="pagination">
                         <div class="pre-page">
@@ -338,5 +223,17 @@ use Model\Dish\DishModel;
         </content>
     </div>
 </div>
+
+<script>
+    function showFormConfirm(dish_id) {
+        document.getElementById('confirm-form').style.visibility = 'visible';
+        document.getElementById('input_delete_id').value = dish_id;
+    }
+    function hideForm() {
+        document.getElementById('confirm-form').style.visibility = 'hidden';
+    }
+</script>
+
 </body>
+
 </html>

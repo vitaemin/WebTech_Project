@@ -25,16 +25,28 @@ use Model\Dish\DishModel;
 ?>
 
 <?php 
-    // include('/xampp/htdocs/WebTechEServices/WebTech_Project/CN_Web/Admin/Model/Dish/DishModel.php');
+// include('/xampp/htdocs/WebTechEServices/WebTech_Project/CN_Web/Admin/Model/Dish/DishModel.php');
 
-    $dish_1 = new DishModel(
-        '001', 
-        'mon_chinh', 
-        'Beaf Steak thịt bò Kobe Phiên bản Mỹ Đình',
-        'Ba chỉ bò Mỹ là thịt ba chỉ của con bò ở Mỹ',
-        '169000',
-        'https://cdn.shopify.com/s/files/1/2128/4095/products/Beef-Sirlion1_d64f721b-db11-4adf-ab7f-69c7d534fb4d_600x.jpg?v=1581030208'
-    );
+
+    // $dish_1 = new DishModel(
+    //     '001', 
+    //     'mon_chinh', 
+    //     'Beaf Steak thịt bò Kobe Phiên bản Mỹ Đình',
+    //     'Ba chỉ bò Mỹ là thịt ba chỉ của con bò ở Mỹ',
+    //     '169000',
+    //     'https://cdn.shopify.com/s/files/1/2128/4095/products/Beef-Sirlion1_d64f721b-db11-4adf-ab7f-69c7d534fb4d_600x.jpg?v=1581030208'
+    // );
+
+    $dishController = new DishController();
+
+    if (isset($_GET['dish_id'])) {
+        $dish_id = $_GET['dish_id'];
+        // echo $dish_id;
+        $dishDetail = $dishController->getDishById($dish_id);
+        // echo  $dishDetail[0]['category'];
+        $dishDetailInfo = $dishDetail[0];
+    }
+    
 ?>
 
 <!doctype html>
@@ -46,6 +58,7 @@ use Model\Dish\DishModel;
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/Dish.css">
+    <link rel="stylesheet" href="./css/Dish_responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <title>Dish Detail</title>
 </head>
@@ -112,27 +125,27 @@ use Model\Dish\DishModel;
             
             <div class="dish-detail-container">
                 <div class="dish-detail-card">
-                    <img class="dish-detail-img" src="<?php echo $dish_1->getImageUrl()?>">
+                    <img class="dish-detail-img" src="<?php echo $dishDetailInfo['image_url']?>">
                     <div class="dish-detail-price"></div>
                 </div>
                 <div class="dish-detail-info">
-                    <div class="detail-name">Tên món ăn</div>
+                    <div class="detail-name"><?php echo $dishDetailInfo['name'] ?></div>
                     <p class="info-title">Thông tin món ăn</p>
                     <ul class="detail-info">
-                        <li>Loại: <?php echo $dish_1->getCategory() ?></li>
-                        <li>Tên: <?php echo $dish_1->getName() ?></li>
-                        <li>Giá: <?php echo $dish_1->getPrice()?></li>
+                        <li>Loại: <?php echo $dishDetailInfo['category'] ?></li>
+                        <li>Tên: <?php echo $dishDetailInfo['name'] ?></li>
+                        <li>Giá: <?php echo $dishDetailInfo['price']. "<sup>vnđ</sup>"?></li>
                     </ul>
                     <p class="info-title">Mô tả</p>
                     <ul class="detail-info">
-                        <li><?php echo $dish_1->getDescription() ?></li>
+                        <li><?php echo $dishDetailInfo['description'] ?></li>
                     </ul>
-                    <p class="info-title">Thuộc Combo:</p>
+                    <!-- <p class="info-title">Thuộc Combo:</p>
                     <ul class="detail-info">
                         <li>Combo 1</li>
                         <li>Combo 2</li>
                         <li>Combo 3</li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
             

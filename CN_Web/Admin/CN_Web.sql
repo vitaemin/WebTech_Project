@@ -20,11 +20,10 @@ CREATE TABLE `event`(
 CREATE TABLE `dish`(
     `dish_id` int not null primary key auto_increment,
     `category` varchar(256),
-    `description` varchar(512),
-    `create_time` date not null ,
     `name` varchar(256) not null ,
+    `description` varchar(512),
     `price` int not null ,
-    `image` varchar(512)
+    `image_url` varchar(512)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `bill`(
