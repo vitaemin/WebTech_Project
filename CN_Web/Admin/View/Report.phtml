@@ -2,10 +2,11 @@
 
 namespace View\Table;
 use Controller\ReportController;
+session_start();
 if(isset($_SESSION["staff"])){
     $staff = $_SESSION["staff"];
 }else{
-    header('Location: index.php');
+    header('Location: Login.php');
 }
 $reportController = new ReportController();
 ?>
