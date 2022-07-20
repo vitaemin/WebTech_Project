@@ -64,7 +64,7 @@ CREATE TABLE `bill_dish`(
     FOREIGN KEY (`dish_id`) REFERENCES dish(`dish_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
+-- bill
 INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VALUES (NULL, NULL, '2022-07-01 21:50:38', '200000', '1');
 INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VALUES (NULL, NULL, '2022-07-02 21:17:17', '100000', '1');
 INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VALUES (NULL, NULL, '2022-07-04 21:17:17', '400000', '1');
@@ -74,3 +74,18 @@ INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VAL
 INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VALUES (NULL, NULL, '2022-07-17 21:17:17', '500000', '1');
 INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VALUES (NULL, NULL, '2022-07-16 21:17:17', '800000', '1');
 INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VALUES (NULL, NULL, '2022-07-18 21:17:17', '700000', '1');
+
+-- table
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '1', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '2', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '3', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '4', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '5', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '6', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '7', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '8', '1', "Nguyễn Văn Biển", "0123455433", "2022-07-18 21:17:17", "4");
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '9', '2', "Nguyễn Văn Minh", "0123455433", "2022-07-12 21:17:17", "4");
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '10', '2', "Nguyễn Văn Biển", "0123455433", "2022-07-12 21:17:17", "4");
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '11', '2', "Nguyễn Văn Biển", "0123455433", "2022-07-12 21:17:17", "4");
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '12', '1', "Nguyễn Văn Minh", "01234556733", "2022-07-14 21:17:17", "4");
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '13', '1', "Nguyễn Văn Biển", "0123455433", "2022-07-18 21:17:17", "4");

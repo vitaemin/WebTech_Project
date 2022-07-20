@@ -3,7 +3,6 @@
 namespace View\Table;
 use Controller\TableController;
 
-session_start();
 if(isset($_SESSION["staff"])){
     $staff = $_SESSION["staff"];
 //    var_dump($staff);
@@ -528,8 +527,9 @@ $tableCustomer = $tableController->getTableCustomerReserve();
         user.style.display = "none";
         document.getElementById('container').style.opacity = 1;
     }
-
+</script>
 <!------------------------popup-confirm-start------------------------>
+
 <div id="popup-confirm-reserve" class="popup-confirm-reserve">
     <form class="form-confirm-reserve" method="post" action="">
         <div class="form-confirm-reserve-label">Xác nhận hủy toàn bộ bàn liên quan tới khách hàng</div>

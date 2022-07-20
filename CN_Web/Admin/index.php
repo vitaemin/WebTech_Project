@@ -1,15 +1,23 @@
 <?php
-
+session_start();
 include('./Model/Database/DBConnect.php');
 include('./Controller/LoginController.php');
 include('./Model/Login/LoginDb.php');
-include('./View/Login.phtml');
+include('./Controller/TableController.php');
+include('./Model/Table/TableDb.php');
 
 use Controller\LoginController;
+use Controller\TableController;
+
+$tableController = new TableController();
 $loginController = new LoginController();
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
-        $loginController->renderLogin();
+        if (isset($_SESSION['staff'])){
+            $tableController->renderTable();
+        }else{
+            $loginController->renderLogin();
+        }
         break;
 
     case "POST":
