@@ -3,6 +3,7 @@
 	height: calc(100vh - 70px);
 	min-width: 951px;
 	background-color: #f5f6f7;
+	margin: 0 auto;
 	display: flex;
 	align-items: center;
 	justify-content: center;
