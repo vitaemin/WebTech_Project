@@ -8,7 +8,7 @@ use Controller\TableCustomerController;
 $tableController = new TableCustomerController();
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
-        include_once 'View/index.phtml';
+        $tableController->renderTable();
         break;
     case "POST":
         if(isset($_POST['reserve_table'])){

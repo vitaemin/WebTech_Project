@@ -48,6 +48,14 @@ CREATE TABLE `table`(
     FOREIGN KEY (`bill_id`) REFERENCES bill(`bill_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `table_reserve_customer`(
+    `table_customer_reserve_id` int not null primary key auto_increment,
+    `customer_name` varchar(256) not null,
+    `phone` varchar(64) not null,
+    `time_reserve` DATETIME not null,
+    `number_people` int not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `bill_dish`(
     `bill_id` int not null ,
     `dish_id` int not null ,
@@ -55,6 +63,7 @@ CREATE TABLE `bill_dish`(
     FOREIGN KEY (`bill_id`) REFERENCES bill(`bill_id`),
     FOREIGN KEY (`dish_id`) REFERENCES dish(`dish_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VALUES (NULL, NULL, '2022-07-01 21:50:38', '200000', '1');
 INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VALUES (NULL, NULL, '2022-07-02 21:17:17', '100000', '1');

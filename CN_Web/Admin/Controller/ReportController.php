@@ -33,9 +33,9 @@ class ReportController
 
     public function getTotalBillByWeek ($weekday){
         $total = 0;
-        $currentDate = date('d-m-y');
+        $currentDate = date('y-m-d');
         foreach ($this->allBill as $key => $bill){
-            if( date("W", strtotime($bill['time_create']))== date("W", strtotime($currentDate))) {
+            if( date("W", strtotime($bill['time_create'])) == date("W", strtotime($currentDate))) {
                 if (date('w', strtotime($bill['time_create'])) == $weekday) {
                     $total += $bill['total'];
                 }

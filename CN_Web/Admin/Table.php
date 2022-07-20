@@ -24,6 +24,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $tableController->addTable();
         } elseif (isset($_POST['delete_table'])){
             $tableController->deleteTable();
+        } elseif (isset($_POST['delete_table_customer_reserve'])){
+            $tableController->deleteTableCustomerReserve();
         }
         break;
     default:

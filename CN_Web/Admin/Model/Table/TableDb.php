@@ -65,9 +65,19 @@ class TableDb
         $stmt->execute();
     }
 
-    public function updateReserveStatus($table_id, $status){
-        $sql = "UPDATE `table` SET status='$status' WHERE table_id = '$table_id'";
+    public function getTableCustomerReserve(){
+        $sql = "SELECT * FROM `table_reserve_customer`";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
+    }
+
+    public function deleteTableCustomerReserve($tableCustomerReserveId){
+        $sql = "DELETE FROM `table_reserve_customer` WHERE table_customer_reserve_id = '$tableCustomerReserveId'";
         $stmt = $this->connect->prepare($sql);
         $stmt->execute();
     }
+
 }
