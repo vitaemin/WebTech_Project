@@ -25,7 +25,7 @@ CREATE TABLE `dish`(
 CREATE TABLE `bill`(
     `bill_id` int not null primary key auto_increment,
     `event_id` int,
-    `date` DATETIME not null ,
+    `time_create` DATETIME not null ,
     `total` int not null ,
     `status` int not null,
     FOREIGN KEY (`event_id`) REFERENCES event(`event_id`)
