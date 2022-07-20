@@ -1,5 +1,6 @@
 .content {
 	width: calc(100vw - 250px);
+	height: calc(100vh - 70px);
 	background-color: #f5f6f7;
 	display: flex;
 	align-items: center;
@@ -13,16 +14,17 @@
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	overflow: auto;
 }
 .add-event {
-	width: 100px;
+	width: 140px;
 	font-size: 16px;
 	font-weight: bold;
 	color: white;
 	background-color: #4fcf74;
 	border-radius: 4px;
 	border: none;
-	padding: 5px 10px;
+	padding: 10px;
 	position: absolute;
 	top: 20px;
 	right: 20px;
@@ -154,7 +156,8 @@ td img {
 .agree-add:hover {
 	background-color: #22d455;
 }
-#eventId, #eventId2 {
+#eventId,
+#eventId2 {
 	width: 0;
 }
 .agree-del {
@@ -170,4 +173,9 @@ td img {
 }
 .agree-del:hover {
 	background-color: #d80f0f;
+}
+@media screen and (max-width: 414px) {
+	.content {
+		width: 100%;
+	}
 }
