@@ -1,5 +1,6 @@
 .content {
 	width: calc(100vw - 250px);
+	height: calc(100vh - 70px);
 	background-color: #f5f6f7;
 	display: flex;
 	align-items: center;
@@ -7,12 +8,14 @@
 }
 .wrapper {
 	width: 90%;
+	min-width: 80vw;
 	height: 90%;
 	background-color: #fff;
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	overflow-x: auto;
 }
 .add-event {
 	width: 100px;
@@ -170,4 +173,9 @@ td img {
 }
 .agree-del:hover {
 	background-color: #d80f0f;
+}
+@media screen and (max-width: 414px) {
+	.content {
+		width: 100%;
+	}
 }
