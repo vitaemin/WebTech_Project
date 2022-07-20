@@ -34,7 +34,7 @@
 	cursor: pointer;
 }
 .event-list {
-	margin-top: 200px;
+	margin-top: 400px;
 }
 table {
 	width: 100%;
@@ -88,6 +88,7 @@ td img {
 .add-event-layout {
 	display: none;
 	width: 100vw;
+	min-width: 400px;
 	height: 100vh;
 	position: absolute;
 	top: 0;
@@ -96,6 +97,7 @@ td img {
 }
 .add-wrapper {
 	width: 25%;
+	min-width: 400px;
 	background-color: white;
 	margin: 200px auto;
 	display: flex;
