@@ -3,6 +3,7 @@
 namespace View\Table;
 use Controller\TableController;
 
+session_start();
 if(isset($_SESSION["staff"])){
     $staff = $_SESSION["staff"];
 //    var_dump($staff);
