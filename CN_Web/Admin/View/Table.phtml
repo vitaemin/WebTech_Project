@@ -20,6 +20,9 @@ if(isset($_GET['table_id'])){
 }
 $currenttable = $tableController->getTableById($table_id);
 $grouptable = $tableController->getTableByOtherTable($table_id);
+
+$tableCustomer = $tableController->getTableCustomerReserve();
+
 ?>
 
 <!doctype html>
@@ -51,8 +54,8 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
                     <p><a href="./ChangePasswordForm.php">Doi mat khau</a></p>
                     <p><a href="./index.php">Dang xuat</a></p>
                 </div>
-            </span>          
-        </div>  
+            </span>
+        </div>
     </header>
 
     <div id="container" class="container">
@@ -118,47 +121,117 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
             <div class="table-wrapper">
 <!--------------------------table-list-start-------------------------->
                 <div class="content-table">
-                    <div class="table-note">
-                        <div class="table-note-group">
-                            <button class="table-not-booked"></button>
-                            <span>Chưa đặt</span>
-                        </div>
-                        <div class="table-note-group">
-                            <button class="table-booked"></button>
-                            <span>Đã đặt</span>
-                        </div>
-                        <div class="table-note-group">
-                            <button class="table-received"></button>
-                            <span>Đang sử dụng</span>
-                        </div>
-                    </div>
-                    <div class="table-list">
-                        <?php
-                        foreach ($tables as $table){
-                            $tableurl = $_SERVER['PHP_SELF'];
-                            $tableurl .= "?table_id=".$table['table_id'];
-                            if($table['status'] == 0){
-                                echo "<a class='table-not-booked' href ='$tableurl'>";
+                    <?php if ($tableCustomer != null && isset($_GET['reserve'])) :?>
+                        <div class='list-table-customer'>
+                            <label class="list-table-customer-notification">* Bàn khách vừa đặt</label>
+                            <?php
+                            foreach ($tableCustomer as $table){
+                                echo "<div class='table-customer-group'>";
+
+                                echo "<div class='table-customer-label dropdown'>";
                                 echo "<span>";
-                                echo $table['number'];
+                                echo $table['customer_name']." - ".$table['phone'];
                                 echo "</span>";
-                                echo "</a>";
-                            }elseif ($table['status'] == 1){
-                                echo "<a class='table-booked' href ='$tableurl'>";
+                                echo "<i class='fa-solid fa-angle-down'></i>";
+                                echo "</div>";
+
+                                echo "<div class='table-customer-content'>";
+
+                                echo "<div class='table-customer-content-group'>";
+                                echo "<label>";
+                                echo "Tên khách hàng:";
+                                echo "</label>";
                                 echo "<span>";
-                                echo $table['number'];
+                                echo $table['customer_name'];
                                 echo "</span>";
-                                echo "</a>";
-                            }else{
-                                echo "<a class='table-received' href ='$tableurl'>";
+                                echo "</div>";
+
+                                echo "<div class='table-customer-content-group'>";
+                                echo "<label>";
+                                echo "SĐT:";
+                                echo "</label>";
                                 echo "<span>";
-                                echo $table['number'];
+                                echo $table['phone'];
                                 echo "</span>";
-                                echo "</a>";
+                                echo "</div>";
+
+                                echo "<div class='table-customer-content-group'>";
+                                echo "<label>";
+                                echo "Số người:";
+                                echo "</label>";
+                                echo "<span>";
+                                echo $table['number_people'];
+                                echo "</span>";
+                                echo "</div>";
+
+                                echo "<div class='table-customer-content-group'>";
+                                echo "<label>";
+                                echo "Thời gian đặt:";
+                                echo "</label>";
+                                echo "<span>";
+                                echo $table['time_reserve'];
+                                echo "</span>";
+                                echo "</div>";
+
+                                echo "<form method='post'>";
+                                $table_customer_reserve_id = $table['table_customer_reserve_id'];
+                                echo "<input type='hidden' name='table_customer_reserve_id' value='$table_customer_reserve_id' >";
+                                echo "<button type='submit' name='delete_table_customer_reserve' class='btn-delete_table_customer_reserve'>";
+                                echo "Xác nhận";
+                                echo "</button>";
+                                echo "</form>";
+
+                                echo "</div>";
+
+                                echo " </div>";
                             }
-                        }
-                        ?>
+                            ?>
+                        </div>
+                    <?php endif;?>
+                    <div class="table-list">
+                        <div class="table-note">
+                            <div class="table-note-group">
+                                <button class="table-not-booked"></button>
+                                <span>Chưa đặt</span>
+                            </div>
+                            <div class="table-note-group">
+                                <button class="table-booked"></button>
+                                <span>Đã đặt</span>
+                            </div>
+                            <div class="table-note-group">
+                                <button class="table-received"></button>
+                                <span>Đang sử dụng</span>
+                            </div>
+                        </div>
+                        <div class="table-list-content">
+                            <?php
+                            foreach ($tables as $table){
+                                $tableurl = $_SERVER['PHP_SELF'];
+                                $tableurl .= "?table_id=".$table['table_id'];
+                                if($table['status'] == 0){
+                                    echo "<a class='table-not-booked' href ='$tableurl'>";
+                                    echo "<span>";
+                                    echo $table['number'];
+                                    echo "</span>";
+                                    echo "</a>";
+                                }elseif ($table['status'] == 1){
+                                    echo "<a class='table-booked' href ='$tableurl'>";
+                                    echo "<span>";
+                                    echo $table['number'];
+                                    echo "</span>";
+                                    echo "</a>";
+                                }else{
+                                    echo "<a class='table-received' href ='$tableurl'>";
+                                    echo "<span>";
+                                    echo $table['number'];
+                                    echo "</span>";
+                                    echo "</a>";
+                                }
+                            }
+                            ?>
+                        </div>
                     </div>
+
                 </div>
                 <!--------------------------table-list-end-------------------------->
 
@@ -465,7 +538,9 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
         </div>
     </form>
 </div>
----------------------popup-confirm-end----------------------
+
+<!----------------------popup-confirm-end---------------------->
+
 <script>
     function openSide(){
         const sidebar = document.getElementById("sidebar");
@@ -484,7 +559,21 @@ $grouptable = $tableController->getTableByOtherTable($table_id);
         });
     }
 </script>
+<script>
+    var dropdown = document.getElementsByClassName("dropdown");
+    var i;
 
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
+</script>
 <script>
     const btn_update_reserve = document.getElementById("btn-update-reserve");
     const btn_cancel_reserve = document.getElementById("btn-cancel-reserve");

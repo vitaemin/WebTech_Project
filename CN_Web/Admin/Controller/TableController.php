@@ -115,5 +115,14 @@ class TableController{
         header('Location: Table.php');exit;
     }
 
+    public function getTableCustomerReserve(){
+        return $this->tableDb->getTableCustomerReserve();
+    }
+    public function deleteTableCustomerReserve(){
+        $tableCustomerReserveId = $_POST['table_customer_reserve_id'];
+        $this->tableDb->deleteTableCustomerReserve($tableCustomerReserveId);
+        header('Location: Table.php?reserve');exit;
+    }
+
 
 }

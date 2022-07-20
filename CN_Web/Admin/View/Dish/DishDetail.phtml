@@ -4,7 +4,13 @@ namespace View\Dish;
 use Controller\DishController;
 // use Model;
 use Model\Dish\DishModel;
-
+session_start();
+if(isset($_SESSION["staff"])){
+    $staff = $_SESSION["staff"];
+//    var_dump($staff);
+}else{
+    header('Location: index.php');
+}
 // session_start();
 // if(isset($_SESSION["staff"])){
 //     $staff = $_SESSION["staff"];
