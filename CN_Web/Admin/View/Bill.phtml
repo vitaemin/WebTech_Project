@@ -96,7 +96,7 @@ $dishs = $dishController->getAllDish();
                     echo "<td>".$discount."</td>";
                     echo "<td>".$bill['time_create']."</td>";
                     echo "<td>".$bill['total']."</td>";
-                    $stt = $bill['status'] == 0 ? "Đã thanh toán" : "Chưa thanh toán";
+                    $stt = $bill['status'] == 1 ? "Đã thanh toán" : "Chưa thanh toán";
                     echo "<td>".$stt."</td>";
                     echo "</tr>";
                   }
