@@ -11,7 +11,7 @@ class EventDb
     }
 
     public function getAllEvent() {
-        $sql = "SELECT * FROM `event`;";
+        $sql = "select * from event;";
         $stmt = $this->connect->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -43,9 +43,21 @@ class EventDb
         $stmt->execute();
     }
 
+    public function getEventDiscount($eventId) {
+        $sql = "select discount_rate from event where event_id = $eventId;";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
     public function deleteEvent($eventId) {
         $sql = "DELETE FROM event WHERE `event`.`event_id` = $eventId;";
         $stmt = $this->connect->prepare($sql);
         $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
     }
 }

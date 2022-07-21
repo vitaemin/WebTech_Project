@@ -1,0 +1,224 @@
+<?php
+
+namespace View\Bill;
+use Controller\BillController;
+use Controller\EventController;
+// use Controller\DishController;
+
+session_start();
+if(isset($_SESSION["staff"])){
+    $staff = $_SESSION["staff"];
+//    var_dump($staff);
+}else{
+    header('Location: index.php');
+}
+
+$billController = new BillController();
+$bills = $billController->getAllBill();
+// $dishs = $dishController->getAllDish();
+
+
+
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/Bill.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <title>Admin Page</title>
+</head>
+<body>
+
+<div class = "page">
+    <header class="header-wrapper">
+        <div class="header-group">
+            <label> Tên nhà hàng</label>
+        </div>
+
+        <div class="header-group">
+            <i class='fa-solid fa-user icon-user'></i>
+            <span class="header-identity">
+                <?php #echo $staff[0]['name'];?>
+            </span>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar-wrapper">
+            <a href="./Table.php" class="sidebar-link">
+                <i class="fa-solid fa-table"></i>
+                Quản lý Bàn
+            </a>
+            <a href="./Bill.php" class="sidebar-link active">
+                <i class="fa-solid fa-money-bill"></i>
+                Quản lý Hóa đơn
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-utensils"></i>
+                Quản lý Món ăn
+            </a>
+            <a href="./Event.php" class="sidebar-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                Quản lý Sự kiện
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-chart-column"></i>
+                Thống kê kinh doanh
+            </a>
+        </aside>
+        
+        <div class="content">
+          <div class="wrapper">
+            <button class="add-bill" onclick="showAddBillForm()">Add Bill</button>
+            <div class="bill-list">             
+                <?php
+                  echo "<table>
+                          <tr>
+                            <th class='bill_id'>Mã hóa đơn</th>
+                            <th class='bill_id'>Tên KH</th>
+                            <th class='event_id'>Giảm giá</th>
+                            <th class='date'>Ngày nhập</th>
+                            <th class='total'>Tổng tiền</th>
+                            <th class='status'>Trạng thái</th>
+                            <th class='update-btn' id='update-btn'>a</th>
+                          </tr>";
+                  foreach ($bills as $index => $bill) {
+                    echo "<tr>";
+                    echo "<td>".$bill['bill_id']."</td>";
+                    echo "<td>".$bill['guest_name']."</td>";
+                    $discount = $billController->getEventDiscount($bill['event_id']);
+                    echo "<td>".$discount[0][0]."</td>";
+                    echo "<td>".$bill['date']."</td>";
+                    echo "<td>".$bill['total']."</td>";
+                    $stt = $bill['status'] == 0 ? "Đã thanh toán" : "Chưa thanh toán";
+                    echo "<td>".$stt."</td>";
+                    echo "<td class='update-btn' id='update-btn' onclick>a</td>";
+                    echo "</tr>";
+                  }
+                  echo "</table>";
+                ?>
+            </div>
+          </div>
+          <div class="add-bill-layout" id="bill-layout">
+            <div class="add-wrapper">
+              <button class="exit-button" onclick="handleExit()">x</button>
+              <form action="./Bill.php" id="bill-form" method='POST' autocomplete="off">
+                <p>
+                  <span>Ten KH</span>
+                  <input id='guest_name' type="text" name="guest_name"><br>
+                </p>
+                <p>
+                  <span>So dien thoai</span>
+                  <input id='guest_phone' type="text" name="guest_phone">
+                </p>
+                <p>
+                  <span>Ma su kien</span>
+                  <input id='event_id' type="text" name="event_id">
+                </p>
+                <table id='tableId'>
+                  <tr>
+                    <th>Tên món</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                  </tr>
+                  <tr onchange="changeSum(this)">
+                    <td onclick="changePrice(this)"><input type="text" class="dish_id" name="dish_id" id="dish_id" ></td>
+                    <td><input type="text" id="don_gia" name="don_gia" readonly></td>
+                    <td><input type="text" class="dish_quantity" name="dish_quantity"></td>
+                    <td><input type="text" id="sum" name="sum" readonly></td>
+                  </tr>
+                  <input type="text" name="total" style="visibility:hidden" id="total">
+                </table>
+                <button type='button' onclick=addInputRow()>+</button>
+                <button class="add-button" id="add-button" name="add" onclick="changeTotal()">Add</button>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var lis = [
+      <?php
+        foreach ($bills as $index => $bill) {
+          echo "'$bill[guest_name]',";
+        }
+      ?>
+    ];
+
+    var priceArr = [
+      <?php
+        foreach ($bills as $index => $bill) {
+          echo "'$bill[guest_phone]',";
+        }
+      ?>
+    ];
+
+    function addInputRow() {
+      table = document.getElementById("tableId");
+      row = table.insertRow(-1);
+      row.setAttribute("onchange", "changeSum(this)");
+      cell1 = row.insertCell(0);
+      cell1.setAttribute("onclick", "changePrice(this)")
+      cell2 = row.insertCell(1);
+      cell3 = row.insertCell(2); 
+      cell4 = row.insertCell(3);
+      cell1.innerHTML = '<input type="text" class="diss_id" name="dish_id" id="dish_id">';
+      cell2.innerHTML = '<input type="text" class="don_gia" name="don_gia" readonly>';
+      cell3.innerHTML = '<input type="text" class="dish_quantity" name="dish_quantity">';
+      cell4.innerHTML = '<input type="text" id="sum" name="sum" readonly>'
+
+      autocomplete(cell1.firstElementChild, lis);
+    }
+
+    function showAddBillForm() {
+      form = document.getElementById("bill-layout");
+      form.style.display="block";
+    }
+
+    function handleExit() {
+      form = document.getElementById("bill-layout");
+      form.style.display="none";
+    }
+
+    function changeSum(obj) {
+      let tdNodes = obj.children;
+      let donGia = tdNodes[1].firstElementChild.value;
+      let soLuong = tdNodes[2].firstElementChild.value;
+      let thanhTien = donGia*soLuong;
+      tdNodes[3].firstElementChild.setAttribute("value", thanhTien);
+
+      console.log("changeSum");
+    }
+
+    function changePrice(obj) {
+      let nextSibling = obj.nextElementSibling;
+      let name=obj.firstElementChild.value;
+      let idx = lis.indexOf(name);
+      nextSibling.firstElementChild.setAttribute("value", priceArr[idx]);
+      console.log(nextSibling,idx,name);
+    }
+
+    function changeTotal() {
+      var arr = document.getElementsByName('sum');
+      var tot=0;
+      for(var i=0;i<arr.length;i++){
+          if(parseInt(arr[i].value))
+              tot += parseInt(arr[i].value);
+      }
+      document.getElementById('total').value = tot;
+      console.log(tot);
+    }
+
+</script>
+<script src="./View/javascript/autocomplete.js"></script>
+</body>
+</html>

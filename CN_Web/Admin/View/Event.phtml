@@ -44,11 +44,11 @@ $events = $eventController->getAllEvent();
     </header>
     <div class="container">
         <aside class="sidebar-wrapper">
-            <a href="#" class="sidebar-link">
+            <a href="./Table.php" class="sidebar-link">
                 <i class="fa-solid fa-table"></i>
                 Quản lý Bàn
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="./Bill.php" class="sidebar-link">
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
@@ -65,6 +65,7 @@ $events = $eventController->getAllEvent();
                 Thống kê kinh doanh
             </a>
         </aside>
+        
         <div class="content">
           <div class="wrapper">
             <button class="add-event" onclick="addEvent()">Add Event</button>
@@ -133,6 +134,7 @@ $events = $eventController->getAllEvent();
 </div>
 
 <script>
+
     function addEvent() {
         const form = document.getElementById('event-form');
         form.style.display = "block";
