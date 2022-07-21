@@ -59,6 +59,7 @@ CREATE TABLE `bill_dish`(
     FOREIGN KEY (`dish_id`) REFERENCES dish(`dish_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `staff` (`staff_id`, `name`, `phone`, `password`) VALUES (NULL, 'Admin', '0123', '0123');
 
 INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VALUES (NULL, NULL, '2022-07-01 21:50:38', '200000', '1');
 INSERT INTO `bill` (`bill_id`, `event_id`, `time_create`, `total`, `status`) VALUES (NULL, NULL, '2022-07-02 21:17:17', '100000', '1');

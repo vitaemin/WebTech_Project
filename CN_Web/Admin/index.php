@@ -12,6 +12,10 @@ $tableController = new TableController();
 $loginController = new LoginController();
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
+        if (isset($_SESSION['staff'])) {
+            unset($_SESSION['staff']);
+            session_destroy();
+        }
         $loginController->renderLogin();
 
         break;

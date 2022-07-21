@@ -3,7 +3,7 @@ body{
 }
 /*---------------header--------------*/
 .header-wrapper{
-    min-width: 951px;
+    /* min-width: 951px; */
     z-index: 2;
     height: 60px;
     display: flex;
@@ -21,7 +21,7 @@ body{
     padding: 0px 15px;
     cursor: pointer;
 }
-.header-group:hover {
+.header-group:hover #header-group {
     background-color: #245efe;
 }
 .header-identity{
