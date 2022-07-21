@@ -93,7 +93,7 @@ $dataMonth = array(
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/Report.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <title>Document</title>
+    <title>Admin page</title>
 </head>
 <body>
 
@@ -104,11 +104,15 @@ $dataMonth = array(
             <label> Tên nhà hàng</label>
         </div>
 
-        <div class="header-group">
+        <div class="header-group" onclick="handleClickOnUser()">
             <i class='fa-solid fa-user icon-user'></i>
             <span class="header-identity">
                 <?php echo $staff[0]['name'];?>
-            </span>
+                <div class="user-info" id="user-info">
+                    <p><a href="./ChangePasswordForm.php">Đổi mật khẩu</a></p>
+                    <p><a href="./index.php">Đăng xuất</a></p>
+                </div>
+            </span>          
         </div>
     </header>
 
@@ -119,7 +123,7 @@ $dataMonth = array(
                 <i class="fa-solid fa-table"></i>
                 Quản lý Bàn
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Bill.php" class="sidebar-link">
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
@@ -208,6 +212,17 @@ $dataMonth = array(
                 sidebar.classList.add("sidebar-active") ;
             }
         });
+    }
+
+    function handleClickOnUser() {
+        const user = document.getElementById('user-info');
+        if (user.style.display == "none") {
+            user.style.display = "block";
+            document.getElementById('container').style.opacity = 0.3;
+            return;
+        }
+        user.style.display = "none";
+        document.getElementById('container').style.opacity = 1;
     }
 </script>
 

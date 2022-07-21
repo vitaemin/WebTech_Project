@@ -1,7 +1,6 @@
 .content {
 	width: calc(100vw - 250px);
 	height: calc(100vh - 70px);
-	min-width: 951px;
 	background-color: #f5f6f7;
 	margin: 0 auto;
 	display: flex;
@@ -34,7 +33,8 @@
 	cursor: pointer;
 }
 .event-list {
-	margin-top: 400px;
+	position: absolute;
+	top: 80px;
 }
 table {
 	width: 100%;
@@ -75,6 +75,7 @@ td img {
 	border: 1px solid #4b4b4b;
 	padding: 3px 6px;
 	cursor: pointer;
+	margin-bottom: 5px;
 }
 .deletebtn {
 	font-weight: bold;
@@ -88,7 +89,6 @@ td img {
 .add-event-layout {
 	display: none;
 	width: 100vw;
-	min-width: 951px;
 	height: 100vh;
 	position: absolute;
 	top: 0;
@@ -97,7 +97,7 @@ td img {
 }
 .add-wrapper {
 	width: 25%;
-	min-width: 400px;
+	min-width: 380px;
 	background-color: white;
 	margin: 200px auto;
 	display: flex;
@@ -178,6 +178,11 @@ td img {
 }
 .agree-del:hover {
 	background-color: #d80f0f;
+}
+@media screen and (max-width: 800px) {
+	.collapse {
+		display: none;
+	}
 }
 @media screen and (max-width: 950px) {
 	.content {

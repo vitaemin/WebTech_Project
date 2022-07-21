@@ -41,6 +41,7 @@ CREATE TABLE `bill` (
 --
 -- Dumping data for table `bill`
 --
+INSERT INTO `staff` (`staff_id`, `name`, `phone`, `password`) VALUES (NULL, 'Admin', '0123', '0123');
 
 INSERT INTO `bill` (`bill_id`, `event_id`, `discount_rate`, `time_create`, `guest_name`, `guest_phone`, `total`, `status`) VALUES
 (13, NULL, NULL, '2022-07-21 00:00:00', 'thit bo', '150', 190, 1),
@@ -278,3 +279,17 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- table
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '1', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '2', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '3', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '4', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '5', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '6', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '7', '0', NULL, NULL, NULL, NULL);
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '8', '1', "Nguyễn Văn Biển", "0123455433", "2022-07-18 21:17:17", "4");
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '9', '1', "Nguyễn Văn Minh", "0123455433", "2022-07-14 21:17:17", "4");
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '10', '1', "Nguyễn Văn Biển", "0123455433", "2022-07-18 21:17:17", "4");
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '11', '1', "Nguyễn Văn Biển", "0123455433", "2022-07-18 21:17:17", "4");
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '12', '1', "Nguyễn Văn Minh", "01234556733", "2022-07-14 21:17:17", "4");
+INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '13', '1', "Nguyễn Văn Biển", "0123455433", "2022-07-18 21:17:17", "4");
