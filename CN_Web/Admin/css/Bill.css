@@ -8,9 +8,9 @@
   background-color: rgba(23, 25, 26, 0.5);
 }
 .add-wrapper {
-  width: 50%;
+  width: 70%;
   background-color: white;
-  margin: 100px auto;
+  margin: 50px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,12 +23,91 @@
   margin-left:5%;
 }
 
-#bill-form button {
-  width:70%;
-  align-self: center;
-  
+.content{
+  background-color: #f5f5f5;
+  margin: 10px 20px;
+  width: 100%;
 }
-
-span {
-  width:100px;
+.wrapper{
+}
+.add-bill{
+  border-radius: 4px;
+  border: none;
+  padding: 10px 20px;
+  display: block;
+  margin: auto;
+  background-color: #2245ae;
+  color: #fff;
+  cursor: pointer;
+}
+.bill-list{
+  background-color: #fff;
+  box-shadow: 1px 1px #b6b5b5;
+  border-radius: 4px;
+  margin: 10px 20px;
+}
+.bill-list table{
+  text-align: center;
+  padding: 20px;
+  overflow-x: auto;
+  width: 100%;
+  min-width: 500px;
+  border-collapse: collapse;
+  border-spacing: 5px;
+}
+.bill-list tr{
+  border-bottom: 1px solid #d7d5d5;
+}
+.bill-list th, td{
+  padding: 10px;
+}
+.exit-button {
+  text-align: center;
+  display: block;
+  position: absolute;
+  right: 0;
+  top:0;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.exit-button:hover{
+  background-color: red;
+  color: #fff;
+}
+#bill-form{
+  padding: 20px;
+}
+#bill-form p span{
+  font-weight: 600;
+  padding-right: 5px;
+}
+#bill-form input{
+  background-color: #f5f5f5;
+  border: 0.3px solid #d9d6d6;
+  padding: 5px 10px ;
+}
+.add_btn-row{
+  margin: 0px 40px;
+  border: none;
+  border-radius: 3px;
+  background-color: #c9c9c9;
+  padding: 5px 10px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  display: block;
+}
+.add_btn-row:hover{
+  opacity: 0.7;
+}
+.add-button{
+  display: block;
+  margin: 30px auto;
+  border: none;
+  border-radius: 3px;
+  background-color: #2245ae;
+  color: #FFFFFF;
+  padding: 5px 10px;
+  cursor: pointer;
 }

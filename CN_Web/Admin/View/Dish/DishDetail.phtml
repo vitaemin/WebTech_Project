@@ -11,38 +11,9 @@ if(isset($_SESSION["staff"])){
 }else{
     header('Location: Login.php');
 }
-// session_start();
-// if(isset($_SESSION["staff"])){
-//     $staff = $_SESSION["staff"];
-// //    var_dump($staff);
-// } else{
-//     header('Location: index.php');
-// }
-// $tableController = new TableController();
-// $tables = $tableController->getAllTable();
-// //var_dump($tables);
-// $table_id = 1;
-// if(isset($_GET['table_id'])){
-//     $_SESSION['table_id'] = $_GET['table_id'];
-//     $table_id = $_SESSION['table_id'];
-// }
-// $currenttable = $tableController->getTableById($table_id);
-// $grouptable = $tableController->getTableByOtherTable($table_id);
 ?>
 
-<?php 
-// include('/xampp/htdocs/WebTechEServices/WebTech_Project/CN_Web/Admin/Model/Dish/DishModel.php');
-
-
-    // $dish_1 = new DishModel(
-    //     '001', 
-    //     'mon_chinh', 
-    //     'Beaf Steak thịt bò Kobe Phiên bản Mỹ Đình',
-    //     'Ba chỉ bò Mỹ là thịt ba chỉ của con bò ở Mỹ',
-    //     '169000',
-    //     'https://cdn.shopify.com/s/files/1/2128/4095/products/Beef-Sirlion1_d64f721b-db11-4adf-ab7f-69c7d534fb4d_600x.jpg?v=1581030208'
-    // );
-
+<?php
     $dishController = new DishController();
 
     if (isset($_GET['dish_id'])) {
@@ -74,13 +45,17 @@ if(isset($_SESSION["staff"])){
     <header class="header-wrapper">
         <div class="header-group">
             <button class="btn-open-sidebar" onclick="openSide()">☰</button>
-            <label> Tên nhà hàng</label>
+            <label>BABA RESTO</label>
         </div>
 
-        <div class="header-group">
+        <div class="header-group" onclick="handleClickOnUser()">
             <i class='fa-solid fa-user icon-user'></i>
             <span class="header-identity">
                 <?php echo $staff[0]['name'];?>
+                <div class="user-info" id="user-info">
+                    <p><a href="./ChangePasswordForm.php">Đổi mật khẩu</a></p>
+                    <p><a href="./index.php">Đăng xuất</a></p>
+                </div>
             </span>
         </div>
     </header>
@@ -91,7 +66,7 @@ if(isset($_SESSION["staff"])){
                 <i class="fa-solid fa-table"></i>
                 Quản lý Bàn
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Bill.php" class="sidebar-link">
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
@@ -177,7 +152,19 @@ if(isset($_SESSION["staff"])){
             }
         });
     }
+
+    function handleClickOnUser() {
+        const user = document.getElementById('user-info');
+        if (user.style.display == "none") {
+            user.style.display = "block";
+            document.getElementById('container').style.opacity = 0.3;
+            return;
+        }
+        user.style.display = "none";
+        document.getElementById('container').style.opacity = 1;
+    }
 </script>
+
 
 </body>
 </html>

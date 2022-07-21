@@ -4,7 +4,13 @@ namespace View\Dish;
 use Controller\DishController;
 // use Model;
 // use Model\Dish\DishModel;
-
+session_start();
+if(isset($_SESSION["staff"])){
+    $staff = $_SESSION["staff"];
+//    var_dump($staff);
+}else{
+    header('Location: Login.php');
+}
     $dishController = new DishController();
     function test_input($data) {
         $data = trim($data);
@@ -80,13 +86,6 @@ use Controller\DishController;
         if (isset($_POST['button_edit_confirm'])) {
             echo $dishDetailInfo['name'] . "==". $name;
             if (!$imageUrlErr && !$descriptionErr && !$nameErr && !$categoryErr && !$priceErr) {
-                // if ($dishDetailInfo['name'] == $name && $dishDetailInfo['description'] == $description && $dishDetailInfo['price'] == $price && $dishDetailInfo['image_url'] == $image_url) {
-                //     $edit_success = false;
-                //     $error_nochange = true;
-                //     $redirectFile = htmlspecialchars($_SERVER['PHP_SELF']);
-                // } else {
-                    // $dishController->updateDish($dish_id, $name, $description, $price, $image_url);
-                    // $category = $name = $price = $description = $image_url = "";
                 $redirectFile = "Dish.php";
                 $edit_success = true;
                 // }
@@ -119,13 +118,17 @@ use Controller\DishController;
     <header class="header-wrapper">
         <div class="header-group">
             <button class="btn-open-sidebar" onclick="openSide()">☰</button>
-            <label> Tên nhà hàng</label>
+            <label>BABA RESTO</label>
         </div>
 
-        <div class="header-group">
+        <div class="header-group" onclick="handleClickOnUser()">
             <i class='fa-solid fa-user icon-user'></i>
             <span class="header-identity">
                 <?php echo $staff[0]['name'];?>
+                <div class="user-info" id="user-info">
+                    <p><a href="./ChangePasswordForm.php">Đổi mật khẩu</a></p>
+                    <p><a href="./index.php">Đăng xuất</a></p>
+                </div>
             </span>
         </div>
     </header>
@@ -136,7 +139,7 @@ use Controller\DishController;
                 <i class="fa-solid fa-table"></i>
                 Quản lý Bàn
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Bill.php" class="sidebar-link">
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
@@ -234,7 +237,19 @@ use Controller\DishController;
             }
         });
     }
+
+    function handleClickOnUser() {
+        const user = document.getElementById('user-info');
+        if (user.style.display == "none") {
+            user.style.display = "block";
+            document.getElementById('container').style.opacity = 0.3;
+            return;
+        }
+        user.style.display = "none";
+        document.getElementById('container').style.opacity = 1;
+    }
 </script>
+
 
 </body>
 </html>

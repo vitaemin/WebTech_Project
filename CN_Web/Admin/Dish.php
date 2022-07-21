@@ -2,7 +2,6 @@
 
 include('./Model/Database/DBConnect.php');
 include('./Controller/DishController.php');
-// include('./Model/Dish/DishModel.php');
 include('./Model/Dish/DishDb.php');
 
 use Controller\DishController;
@@ -19,21 +18,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
         } 
         else {
             $dishController->renderDish();
-            require_once('./View/Dish/DishEdit.phtml');
         }
         break;
     case "POST":
         if (isset($_POST['button_add'])) {
-            
             require_once('./View/Dish/DishAdd.phtml');
         } else if (isset($_POST['button_add_confirm'])) {
-            // var_dump($_POST['dish-category']);
-            // var_dump($_POST['dish-name']);
-            // var_dump($_POST['dish-price']);
-            // var_dump($_POST['dish-description']);
-            // var_dump($_POST['dish-image']);
             if (($_POST['dish-category']) && ($_POST['dish-name']) && ($_POST['dish-price']) && ($_POST['dish-description']) && ($_POST['dish-image'])) {
-                // var_dump("done");
                 $category = $_POST['dish-category'];
                 $name = $_POST['dish-name'];
                 $description = $_POST['dish-description'];

@@ -17,7 +17,6 @@ class DishController{
 
     public function renderDish()
     {
-        // include_once './View/Dish/DishDetail.phtml';
         include_once './View/Dish/DishManagement.phtml';
     }
     public function getAllDish(){

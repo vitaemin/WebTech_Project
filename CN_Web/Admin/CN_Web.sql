@@ -39,8 +39,7 @@ CREATE TABLE `dish`(
 --
 
 CREATE TABLE `bill` (
-  `bill_id` int(11) NOT NULL,
-  `event_id` int(11) DEFAULT NULL,
+  `bill_id` int(11) NOT NULL primary key auto_increment,
   `discount_rate` int(11) DEFAULT NULL,
   `time_create` datetime NOT NULL,
   `guest_name` varchar(100) NOT NULL,
@@ -49,19 +48,18 @@ CREATE TABLE `bill` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-<<<<<<< HEAD
 --
 -- Dumping data for table `bill`
 --
 INSERT INTO `staff` (`staff_id`, `name`, `phone`, `password`) VALUES (NULL, 'Admin', '0123', '0123');
 
-INSERT INTO `bill` (`bill_id`, `event_id`, `discount_rate`, `time_create`, `guest_name`, `guest_phone`, `total`, `status`) VALUES
-(13, NULL, NULL, '2022-07-21 00:00:00', 'thit bo', '150', 190, 1),
-(14, NULL, NULL, '2022-07-21 04:27:04', 'thit rua', '1200', 100, 1),
-(18, NULL, NULL, '2022-07-21 04:29:39', 'thit cho', '1500', 120, 1),
-(21, NULL, 20, '0000-00-00 00:00:00', 'thit baba', '111', 0, 1),
-(26, NULL, 0, '2022-07-21 04:50:56', 'thit cuu', '112', 240, 1),
-(27, NULL, 0, '2022-07-21 04:53:16', 'thit cuu', '112', 240, 1);
+INSERT INTO `bill` (`discount_rate`, `time_create`, `guest_name`, `guest_phone`, `total`, `status`) VALUES
+( NULL, '2022-07-21 00:00:00', 'Nguyễn Văn Biển', '1542342340', 190000, 1),
+( NULL, '2022-07-21 04:27:04', 'Nguyễn Văn Minh', '1257623500', 100000, 1),
+( NULL, '2022-07-21 04:29:39', 'Nguyễn Văn Minh', '1532342300', 120000, 1),
+( 20, '2022-07-21 00:00:00', 'Nguyễn Văn Biển', '234207111', 1500000, 1),
+( 10, '2022-07-21 04:50:56', 'Nguyễn Văn Biển', '0778788112', 240000, 1),
+( 10, '2022-07-21 04:53:16', 'Nguyễn Văn Biển', '068768112', 240000, 1);
 
 -- --------------------------------------------------------
 

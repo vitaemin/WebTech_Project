@@ -1,8 +1,4 @@
-/* @media screen and (max-width:950px) {
-    .dish-detail-container {
-        flex-direction: column;
-    }
-} */
+
 @media screen and (max-width:1150px) {
     .dish-img-wrap img {
         height: 230px;
@@ -42,7 +38,8 @@
 
 @media screen and (max-width:700px) {
     .content-wrapper {
-        min-width: 500px;
+        margin: 0px;
+        padding: 0px;
     }
     .dish-detail-container {
         flex-direction: column;

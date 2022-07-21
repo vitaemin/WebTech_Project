@@ -2,22 +2,19 @@
 
 namespace View\Bill;
 use Controller\BillController;
-use Controller\EventController;
-// use Controller\DishController;
+use Controller\DishController;
 
 session_start();
 if(isset($_SESSION["staff"])){
     $staff = $_SESSION["staff"];
-//    var_dump($staff);
 }else{
     header('Location: index.php');
 }
 
 $billController = new BillController();
+$dishController = new DishController();
 $bills = $billController->getAllBill();
-// $dishs = $dishController->getAllDish();
-
-
+$dishs = $dishController->getAllDish();
 
 ?>
 
@@ -38,13 +35,18 @@ $bills = $billController->getAllBill();
 <div class = "page">
     <header class="header-wrapper">
         <div class="header-group">
-            <label> Tên nhà hàng</label>
+            <button class="btn-open-sidebar" onclick="openSide()">☰</button>
+            <label>BABA RESTO</label>
         </div>
 
-        <div class="header-group">
+        <div class="header-group" onclick="handleClickOnUser()">
             <i class='fa-solid fa-user icon-user'></i>
             <span class="header-identity">
-                <?php #echo $staff[0]['name'];?>
+                <?php echo $staff[0]['name'];?>
+                <div class="user-info" id="user-info">
+                    <p><a href="./ChangePasswordForm.php">Đổi mật khẩu</a></p>
+                    <p><a href="./index.php">Đăng xuất</a></p>
+                </div>
             </span>
         </div>
     </header>
@@ -58,7 +60,7 @@ $bills = $billController->getAllBill();
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Dish.php" class="sidebar-link">
                 <i class="fa-solid fa-utensils"></i>
                 Quản lý Món ăn
             </a>
@@ -66,7 +68,7 @@ $bills = $billController->getAllBill();
                 <i class="fa-solid fa-calendar-check"></i>
                 Quản lý Sự kiện
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Report.php" class="sidebar-link">
                 <i class="fa-solid fa-chart-column"></i>
                 Thống kê kinh doanh
             </a>
@@ -85,7 +87,6 @@ $bills = $billController->getAllBill();
                             <th class='time_create'>Ngày nhập</th>
                             <th class='total'>Tổng tiền</th>
                             <th class='status'>Trạng thái</th>
-                            <th class='update-btn' id='update-btn'>a</th>
                           </tr>";
                   foreach ($bills as $index => $bill) {
                     echo "<tr>";
@@ -97,7 +98,6 @@ $bills = $billController->getAllBill();
                     echo "<td>".$bill['total']."</td>";
                     $stt = $bill['status'] == 0 ? "Đã thanh toán" : "Chưa thanh toán";
                     echo "<td>".$stt."</td>";
-                    echo "<td class='update-btn' id='update-btn' onclick>a</td>";
                     echo "</tr>";
                   }
                   echo "</table>";
@@ -107,17 +107,17 @@ $bills = $billController->getAllBill();
           <div class="add-bill-layout" id="bill-layout">
             <div class="add-wrapper">
               <button class="exit-button" onclick="handleExit()">x</button>
-              <form action="./Bill.php" id="bill-form" method='POST' autocomplete="off">
+              <form action="" id="bill-form" method='POST' autocomplete="off">
                 <p>
-                  <span>Ten KH</span>
+                  <span>Tên Khách Hàng:</span>
                   <input id='guest_name' type="text" name="guest_name"><br>
                 </p>
                 <p>
-                  <span>So dien thoai</span>
+                  <span>Số điện thoại:</span>
                   <input id='guest_phone' type="text" name="guest_phone">
                 </p>
                 <p>
-                  <span>Giam gia</span>
+                  <span>Giảm giá:</span>
                   <input id='discount_rate' type="text" name="discount_rate">
                 </p>
                 <table id='tableId'>
@@ -135,8 +135,9 @@ $bills = $billController->getAllBill();
                   </tr>
                   <input type="text" name="total" style="visibility:hidden" id="total">
                 </table>
-                <button type='button' onclick=addInputRow()>+</button>
-                <button class="add-button" id="add-button" name="add" onclick="changeTotal()">Add</button>
+
+                      <button type='button' onclick=addInputRow() class="add_btn-row">+</button>
+                      <button class="add-button" id="add-button" name="add" onclick="changeTotal()">Add</button>
               </form>
             </div>
           </div>
@@ -148,16 +149,16 @@ $bills = $billController->getAllBill();
 
     var lis = [
       <?php
-        foreach ($bills as $index => $bill) {
-          echo "'$bill[guest_name]',";
+        foreach ($dishs as $index => $dish) {
+          echo "'$dish[name]',";
         }
       ?>
     ];
 
     var priceArr = [
       <?php
-        foreach ($bills as $index => $bill) {
-          echo "'$bill[guest_phone]',";
+        foreach ($dishs as $index => $dish) {
+          echo "'$dish[price]',";
         }
       ?>
     ];
@@ -196,7 +197,6 @@ $bills = $billController->getAllBill();
       let thanhTien = donGia*soLuong;
       tdNodes[3].firstElementChild.setAttribute("value", thanhTien);
 
-      console.log("changeSum");
     }
 
     function changePrice(obj) {
@@ -220,6 +220,35 @@ $bills = $billController->getAllBill();
       console.log(tot);
     }
 
+</script>
+<script>
+    function openSide(){
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.add("sidebar-active") ;
+
+        window.addEventListener("mouseup", function(event) {
+            if (event.target != sidebar) {
+                sidebar.classList.remove("sidebar-active");
+            }
+        });
+
+        window.addEventListener("resize", () =>{
+            if(window.innerWidth > 414){
+                sidebar.classList.add("sidebar-active") ;
+            }
+        });
+    }
+
+    function handleClickOnUser() {
+        const user = document.getElementById('user-info');
+        if (user.style.display == "none") {
+            user.style.display = "block";
+            document.getElementById('container').style.opacity = 0.3;
+            return;
+        }
+        user.style.display = "none";
+        document.getElementById('container').style.opacity = 1;
+    }
 </script>
 <script src="./View/javascript/autocomplete.js"></script>
 </body>
