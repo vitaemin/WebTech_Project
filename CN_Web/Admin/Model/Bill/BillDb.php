@@ -19,9 +19,10 @@ class BillDb
         return $result;
     }
 
-    public function addBill($event_id, $time_create, $total, $guest_name, $guest_phone) {
-        $sql  ="insert into `bill`(event_id,date,total,status,guest_name, guest_phone) 
-        values('$event_id','$time_create','$total','1','$guest_name','$guest_phone');";
+    public function addBill($discount_rate, $time_create, $total, $guest_name, $guest_phone) {
+        if ($discount_rate=="") $discount_rate=null;
+        $sql  ="insert into `bill`(discount_rate,time_create,total,status,guest_name, guest_phone) 
+        values('$discount_rate','$time_create','$total','1','$guest_name','$guest_phone');";
         $stmt = $this->connect->prepare($sql);
         $stmt->execute();
     }

@@ -4,8 +4,8 @@ namespace Model\Bill;
 
 class Bill{
     protected $bill_id;
-    protected $event_id;
-    protected $date;
+    protected $discount_rate;
+    protected $time_create;
     protected $total;
     protected $status;
 

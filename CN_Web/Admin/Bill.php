@@ -16,7 +16,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case "POST":       
         if (isset($_POST['add'])) {
             $billController->addBill();
-            var_dump($_POST);         
+            // var_dump($_POST);         
         }
         if (isset($_POST['update'])) {
             $billController->updateBill($_POST['eventId'], $_POST['title'], $_POST['description'], $_POST['imgLink']);

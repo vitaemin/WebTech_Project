@@ -81,8 +81,8 @@ $bills = $billController->getAllBill();
                           <tr>
                             <th class='bill_id'>Mã hóa đơn</th>
                             <th class='bill_id'>Tên KH</th>
-                            <th class='event_id'>Giảm giá</th>
-                            <th class='date'>Ngày nhập</th>
+                            <th class='discount_rate'>Giảm giá(%)</th>
+                            <th class='time_create'>Ngày nhập</th>
                             <th class='total'>Tổng tiền</th>
                             <th class='status'>Trạng thái</th>
                             <th class='update-btn' id='update-btn'>a</th>
@@ -91,9 +91,9 @@ $bills = $billController->getAllBill();
                     echo "<tr>";
                     echo "<td>".$bill['bill_id']."</td>";
                     echo "<td>".$bill['guest_name']."</td>";
-                    $discount = $billController->getEventDiscount($bill['event_id']);
-                    echo "<td>".$discount[0][0]."</td>";
-                    echo "<td>".$bill['date']."</td>";
+                    $discount = ($bill['discount_rate'] == ""||$bill['discount_rate']==0)? "Không" : $bill['discount_rate'];
+                    echo "<td>".$discount."</td>";
+                    echo "<td>".$bill['time_create']."</td>";
                     echo "<td>".$bill['total']."</td>";
                     $stt = $bill['status'] == 0 ? "Đã thanh toán" : "Chưa thanh toán";
                     echo "<td>".$stt."</td>";
@@ -117,8 +117,8 @@ $bills = $billController->getAllBill();
                   <input id='guest_phone' type="text" name="guest_phone">
                 </p>
                 <p>
-                  <span>Ma su kien</span>
-                  <input id='event_id' type="text" name="event_id">
+                  <span>Giam gia</span>
+                  <input id='discount_rate' type="text" name="discount_rate">
                 </p>
                 <table id='tableId'>
                   <tr>
@@ -129,7 +129,7 @@ $bills = $billController->getAllBill();
                   </tr>
                   <tr onchange="changeSum(this)">
                     <td onclick="changePrice(this)"><input type="text" class="dish_id" name="dish_id" id="dish_id" ></td>
-                    <td><input type="text" id="don_gia" name="don_gia" readonly></td>
+                    <td><input type="text" id="don_gia" name="don_gia" ></td>
                     <td><input type="text" class="dish_quantity" name="dish_quantity"></td>
                     <td><input type="text" id="sum" name="sum" readonly></td>
                   </tr>
@@ -172,7 +172,7 @@ $bills = $billController->getAllBill();
       cell3 = row.insertCell(2); 
       cell4 = row.insertCell(3);
       cell1.innerHTML = '<input type="text" class="diss_id" name="dish_id" id="dish_id">';
-      cell2.innerHTML = '<input type="text" class="don_gia" name="don_gia" readonly>';
+      cell2.innerHTML = '<input type="text" class="don_gia" name="don_gia" >';
       cell3.innerHTML = '<input type="text" class="dish_quantity" name="dish_quantity">';
       cell4.innerHTML = '<input type="text" id="sum" name="sum" readonly>'
 
@@ -209,11 +209,13 @@ $bills = $billController->getAllBill();
 
     function changeTotal() {
       var arr = document.getElementsByName('sum');
+      var discount = document.getElementById('discount_rate').value;
       var tot=0;
       for(var i=0;i<arr.length;i++){
           if(parseInt(arr[i].value))
               tot += parseInt(arr[i].value);
       }
+      if (discount > 0) tot = (int)(tot*(100-discount)/100);
       document.getElementById('total').value = tot;
       console.log(tot);
     }
