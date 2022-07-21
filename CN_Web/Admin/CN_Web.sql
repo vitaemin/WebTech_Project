@@ -56,5 +56,9 @@ CREATE TABLE `bill_dish`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+-- dish
+INSERT INTO `dish` (`dish_id`, `category`, `name`, `description`, `price`, `image_url`) VALUES (NULL, 'mon_chinh', 'Bò BeafSteak', 'Bò Beaf Steak được chế biến từ đầu bếp đẳng cấp nhất Việt Nam. Thơm ngon mời bạn ăn nha', '299000', 'https://naturallyvietnam.com/wp-content/uploads/2020/05/a54-1024x1024.jpg');
+
+
 
 
