@@ -153,6 +153,17 @@ $events = $eventController->getAllEvent();
             }
         });
     }
+
+    function handleClickOnUser() {
+        const user = document.getElementById('user-info');
+        if (user.style.display == "none") {
+            user.style.display = "block";
+            document.getElementById('container').style.opacity = 0.3;
+            return;
+        }
+        user.style.display = "none";
+        document.getElementById('container').style.opacity = 1;
+    }
 </script>
 
 </body>
