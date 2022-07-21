@@ -25,5 +25,6 @@ class StaffController{
 
     public function changePassword() {
         $this->staffDb->changePassword($_POST['new_pass']);
+        header('Location: index.php');
     }
 }
