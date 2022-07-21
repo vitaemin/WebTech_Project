@@ -227,24 +227,6 @@ $listDishes = $dishController->getAllDish();
         </content>
     </div>
 </div>
-<<<<<<< HEAD
-<script>
-    function openSide(){
-        const sidebar = document.getElementById("sidebar");
-        sidebar.classList.add("sidebar-active") ;
-
-        window.addEventListener("mouseup", function(event) {
-            if (event.target != sidebar) {
-                sidebar.classList.remove("sidebar-active");
-            }
-        });
-
-        window.addEventListener("resize", () =>{
-            if(window.innerWidth > 414){
-                sidebar.classList.add("sidebar-active") ;
-            }
-        });
-=======
 
 <script>
     function showFormConfirm(dish_id) {
@@ -253,7 +235,6 @@ $listDishes = $dishController->getAllDish();
     }
     function hideForm() {
         document.getElementById('confirm-form').style.visibility = 'hidden';
->>>>>>> tiencm
     }
 </script>
 
