@@ -28,11 +28,11 @@ class BillController{
     public function addBill() {
         $bill = $_POST;
         $event_id = $bill['event_id'];
-        $date = getdate();
+        $time_create = getdate();
         $total = $_POST['total'];
         $guest_name = $bill['guest_name'];
         $guest_phone = $bill['guest_phone'];
-        $this->billDb->addBill($event_id, $date, $total, $guest_name, $guest_phone);
+        $this->billDb->addBill($event_id, $time_create, $total, $guest_name, $guest_phone);
     }
 
     public function getEventDiscount($eventId) {

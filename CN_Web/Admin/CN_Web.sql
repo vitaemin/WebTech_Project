@@ -26,6 +26,8 @@ CREATE TABLE `bill`(
     `bill_id` int not null primary key auto_increment,
     `event_id` int,
     `time_create` DATETIME not null ,
+    `guest_name` varchar(100) not null,
+    `guest_phone` varchar(100) not null,
     `total` int not null ,
     `status` int not null,
     FOREIGN KEY (`event_id`) REFERENCES event(`event_id`)
