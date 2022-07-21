@@ -1,3 +1,34 @@
+<?php
+use Controller\DishController;
+$controller = new DishController();
+//$dishes = $controller->getAllEvent();
+//$dishes= $controller->getAllDish();
+
+$dishes= $controller->getAllDishByCategory('khai_vi');
+
+
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (isset($_GET['khai_vi'])) {
+        $dishes= $controller->getAllDishByCategory('khai_vi');
+        $isChoseOne = true;
+        $isChoseTwo = false;
+        $isChoseThree = false;
+    } else if (isset($_GET['mon_chinh'])) {
+        $dishes = $controller->getAllDishByCategory('mon_chinh');
+        $isChoseOne = false;
+        $isChoseTwo = true;
+        $isChoseThree = false;
+    } else if (isset($_GET['trang_mieng'])) {
+        $dishes= $controller->getAllDishByCategory('trang_mieng');
+        $isChoseOne = false;
+        $isChoseTwo = false;
+        $isChoseThree = true;
+    }
+}
+//$dishes_chinh = $controller->getDishByCategory('mon_chinh');
+//var_dump($dishes) ;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -38,94 +69,31 @@
 		<div class="wrap">
 			<h1>THỰC ĐƠN TẠI HÀ NỘI</h1>
 
-			<ul>
-				<li><a class="activated" href="#">Chọn món nướng</a></li>
-				<li><a href="#">Combo xèo xèo</a></li>
-			</ul>
+            <form method="get" class="dish-form" action="./menu.php">
+                <ul>
+                    <li><button class="<?php echo $isChoseOne ? 'activated' : ''?>" type="submit" name="khai_vi" id="khai_vi" onclick="show('khai_vi')">Món khai vị</button></li>
+                    <li><button class="<?php echo $isChoseTwo ? 'activated' : ''?>" type="submit" type="submit" name="mon_chinh" id="mon_chinh" onclick="show('mon_chinh')">Món chính</button></li>
+                    <li><button class="<?php echo $isChoseThree ? 'activated' : ''?>" type="submit" type="submit" name="trang_mieng" id="trang_mieng" onclick="show('trang_mieng')">Món tráng miệng</button></li>
+                </ul>
+            </form>
+
 
 			<div class="combos">
         <p>* Áp dụng cho tất cả các ngày trong tuần</p>
-				<div class="combo">
-          <div class="col-inner">
-            <img
-              src="https://homebbq.thietkewebsitemienphi.com/wp-content/uploads/2018/02/blackbean-noodles.png"
-              alt=""
-            />
-            <h1>Các loại Mỳ</h1>
-            <p><i class="fa-solid fa-check"></i>Mỳ trộn lạnh</p>
-            <p><i class="fa-solid fa-check"></i>Mỳ lạnh nước</p>
-            <p><i class="fa-solid fa-check"></i>Mỳ bò Hàn Quốc</p>
-            <p><i class="fa-solid fa-check"></i>Mỳ bò Hàn Quốc</p>
-          </div>
-  
-          <div class="col-inner">
-            <img
-              src="https://homebbq.thietkewebsitemienphi.com/wp-content/uploads/2018/02/banh.png"
-              alt=""
-            />
-            <h1>Cơm và bánh</h1>
-            <p><i class="fa-solid fa-check"></i>Cơm trộn bát đá nóng</p>
-            <p><i class="fa-solid fa-check"></i>Cơm trộn Hàn Quốc</p>
-            <p><i class="fa-solid fa-check"></i>Bánh Mandu</p>
-            <p><i class="fa-solid fa-check"></i>Bánh Mandu</p>
-          </div>
-  
-          <div class="col-inner">
-            <img
-              src="https://homebbq.thietkewebsitemienphi.com/wp-content/uploads/2018/02/banh.png"
-              alt=""
-            />
-            <h1>Cơm và bánh</h1>
-            <p><i class="fa-solid fa-check"></i>Cơm trộn bát đá nóng</p>
-            <p><i class="fa-solid fa-check"></i>Cơm trộn Hàn Quốc</p>
-            <p><i class="fa-solid fa-check"></i>Bánh Mandu</p>
-          </div>
-  
-          <div class="col-inner">
-            <img
-              src="https://homebbq.thietkewebsitemienphi.com/wp-content/uploads/2018/02/banh.png"
-              alt=""
-            />
-            <h1>Cơm và bánh</h1>
-            <p><i class="fa-solid fa-check"></i>Cơm trộn bát đá nóng</p>
-            <p><i class="fa-solid fa-check"></i>Cơm trộn Hàn Quốc</p>
-            <p><i class="fa-solid fa-check"></i>Bánh Mandu</p>
-          </div>
-
-          <div class="col-inner">
-            <img
-              src="https://homebbq.thietkewebsitemienphi.com/wp-content/uploads/2018/02/blackbean-noodles.png"
-              alt=""
-            />
-            <h1>Các loại Mỳ</h1>
-            <p><i class="fa-solid fa-check"></i>Mỳ trộn lạnh</p>
-            <p><i class="fa-solid fa-check"></i>Mỳ lạnh nước</p>
-            <p><i class="fa-solid fa-check"></i>Mỳ bò Hàn Quốc</p>
-          </div>
-
-          <div class="col-inner">
-            <img
-              src="https://homebbq.thietkewebsitemienphi.com/wp-content/uploads/2018/02/banh.png"
-              alt=""
-            />
-            <h1>Cơm và bánh</h1>
-            <p><i class="fa-solid fa-check"></i>Cơm trộn bát đá nóng</p>
-            <p><i class="fa-solid fa-check"></i>Cơm trộn Hàn Quốc</p>
-            <p><i class="fa-solid fa-check"></i>Bánh Mandu</p>
-          </div>
-
-          <div class="col-inner">
-            <img
-              src="https://homebbq.thietkewebsitemienphi.com/wp-content/uploads/2018/02/banh.png"
-              alt=""
-            />
-            <h1>Cơm và bánh</h1>
-            <p><i class="fa-solid fa-check"></i>Cơm trộn bát đá nóng</p>
-            <p><i class="fa-solid fa-check"></i>Cơm trộn Hàn Quốc</p>
-            <p><i class="fa-solid fa-check"></i>Bánh Mandu</p>
-          </div>
-        </div>
-			</div>
+                <?php
+                    foreach ($dishes as $dish) {
+                        echo "<div class='combo'>
+                <div class='col-inner'>
+                    <img
+                      src='".$dish['image_url']."'
+                      alt=''
+                    />
+                    <h1>".$dish['name']."</h1>
+                    <p><i class='fa-solid fa-check'></i>".$dish['description']."</p>                 
+                </div>
+			</div>";
+                    }
+                ?>
 		</div>
 
 		<script type="text/javascript">
@@ -146,7 +114,15 @@
 				if (menu.style.visibility == 'hidden') menu.style.visibility = 'visible';
 				else menu.style.visibility = 'hidden';
 			}
-		
+
+            // function show(category) {
+            //     document.getElementById('khai_vi').className = '';
+            //     document.getElementById('mon_chinh').className = '';
+            //     document.getElementById('trang_mieng').className = '';
+            //     document.getElementById(category).className = 'activated';
+            //
+            //
+            // }
 		</script>
 	</body>
 </html>
