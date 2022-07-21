@@ -18,7 +18,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
       break;
   case "POST":
       $staffController->changePassword();
-      LoginController->renderLogin();
+      $loginController->renderLogin();
       break;
   default:
       //404;

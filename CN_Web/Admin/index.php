@@ -15,7 +15,6 @@ $loginController = new LoginController();
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
         if (isset($_SESSION['staff'])) {
-            var_dump(1);
             unset($_SESSION['staff']);
             session_destroy();
         }
