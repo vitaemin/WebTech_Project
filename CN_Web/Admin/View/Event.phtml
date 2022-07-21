@@ -2,13 +2,12 @@
 
 namespace View\Event;
 use Controller\EventController;
-
 session_start();
 if(isset($_SESSION["staff"])){
     $staff = $_SESSION["staff"];
 //    var_dump($staff);
 }else{
-    header('Location: index.php');
+    header('Location: Login.php');
 }
 
 $eventController = new EventController();
@@ -62,7 +61,7 @@ $events = $eventController->getAllEvent();
                 <i class="fa-solid fa-utensils"></i>
                 Quản lý Món ăn
             </a>
-            <a href="#" class="sidebar-link active">
+            <a href="Event.php" class="sidebar-link active">
                 <i class="fa-solid fa-calendar-check"></i>
                 Quản lý Sự kiện
             </a>

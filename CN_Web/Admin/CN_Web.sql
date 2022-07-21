@@ -75,6 +75,8 @@ INSERT INTO `event` (`event_id`, `image_link`, `description`, `title`) VALUES (N
 INSERT INTO `event` (`event_id`, `image_link`, `description`, `title`) VALUES (NULL, 'https://kingbbq.vn/wp-content/uploads/2022/06/king-bf_-di-4-tinh-tien-3-90x90.jpg', 'Shop tặng bạn ưu đãi hấp dẫn để thưởng thức trọn vẹn món ngon của ẩm thực Hàn: MIỄN PHÍ 1 SUẤT BUFFET cho nhóm 4 người.', 'Ngập tràn ưu đãi - xèo xèo thỏa thuê');
 INSERT INTO `event` (`event_id`, `image_link`, `description`, `title`) VALUES (NULL, 'https://kingbbq.vn/wp-content/uploads/2022/04/redplus-900-x-900-i-ve-cgv-900x844.jpg', 'Dự tiệc King BBQ cùng hàng trăm món nướng cực đã và có cơ hội nhận ngay vé xem phim CGV cực phê. Ưu đãi chất với quy cách đổi vé siêu đơn giản.', 'Tiệc nướng cực đã');
 
+
+-- table
 INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '1', '0', NULL, NULL, NULL, NULL);
 INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '2', '0', NULL, NULL, NULL, NULL);
 INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '3', '0', NULL, NULL, NULL, NULL);
