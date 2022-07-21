@@ -36,7 +36,7 @@ $events = $eventController->getAllEvent();
             <label> Tên nhà hàng</label>
         </div>
 
-        <div class="header-group" onclick="handleClickOnUser()">
+        <div class="header-group" onclick="handleClickOnUser()" id="header-group">
             <i class='fa-solid fa-user icon-user'></i>
             <span class="header-identity">
                 <?php echo $staff[0]['name'];?>
@@ -48,12 +48,13 @@ $events = $eventController->getAllEvent();
         </div>  
     </header>
     <div class="container" id="container">
-        <aside class="sidebar-wrapper">
-            <a href="./Table.php" class="sidebar-link">
+        <aside class="sidebar-wrapper" id="sidebar">
+            <label>Danh mục quản lý</label>
+            <a href="Table.php" class="sidebar-link">
                 <i class="fa-solid fa-table"></i>
                 Quản lý Bàn
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Bill.php" class="sidebar-link">
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
@@ -78,14 +79,14 @@ $events = $eventController->getAllEvent();
                   echo "<table>
                           <tr>
                             <th class='title'>Tiêu đề</th>
-                            <th class='description'>Mô tả</th>
+                            <th class='description collapse'>Mô tả</th>
                             <th class='img_link'>Hình ảnh</th>
                             <th class='changebtn'></th>
                           </tr>";
                   foreach ($events as $index => $event) {
                     echo "<tr>";
                     echo "<td>".$event['title']."</td>";
-                    echo "<td>".$event['description']."</td>";
+                    echo "<td class='collapse'>".$event['description']."</td>";
                     echo "<td><img src='".$event['image_link']."' /></td>";
                     echo "<td>
                             <button class='editbtn' onclick='editEvent(".$event['event_id'].")'>Sửa</button>
@@ -152,69 +153,6 @@ $events = $eventController->getAllEvent();
                 sidebar.classList.add("sidebar-active") ;
             }
         });
-    }
-</script>
-
-<script>
-    function handleClickOnUser() {
-        const user = document.getElementById('user-info');
-        if (user.style.display == "none") {
-            user.style.display = "block";
-            document.getElementById('container').style.opacity = 0.3;
-            return;
-        }
-        user.style.display = "none";
-        document.getElementById('container').style.opacity = 1;
-    }
-
-    function addEvent() {
-        const form = document.getElementById('event-form');
-        form.style.display = "block";
-        const eventId = document.getElementById('event-id');
-        eventId.style.display = "none";
-        const addBtn = document.getElementById('addbtn');
-        addBtn.style.display = "block";
-        const updateBtn = document.getElementById('updatebtn');
-        updateBtn.style.display = "none";
-    }
-
-    function exitAdd() {
-        const form = document.getElementById('event-form');
-        form.style.display = "none";
-    }
-
-    function editEvent(eid) {
-        const form = document.getElementById('event-form');
-        form.style.display = "block";
-        const eventId = document.getElementById('event-id');
-        eventId.style.display = "block";     
-        const addBtn = document.getElementById('addbtn');
-        addBtn.style.display = "none";
-        const updateBtn = document.getElementById('updatebtn');
-        updateBtn.style.display = "block";
-        const idDisplay = document.getElementById('event-id-to-edit');
-        idDisplay.innerText = eid;
-        const idNonDisplay = document.getElementById('eventId');
-        idNonDisplay.value = eid;
-
-        const title = document.getElementById('title');
-        title.placeholder = 'not changed';
-        const description = document.getElementById('description');
-        description.placeholder = 'not changed';
-        const imgLink = document.getElementById('img_link');
-        imgLink.placeholder = 'not changed';
-    }
-
-    function deleteEvent(eid) {
-        const form = document.getElementById('form-to-del');
-        form.style.display = "block";
-        const idNonDisplay = document.getElementById('eventId2');
-        idNonDisplay.value = eid;
-    }
-
-    function exitDel() {
-        const form = document.getElementById('form-to-del');
-        form.style.display = "none";
     }
 </script>
 

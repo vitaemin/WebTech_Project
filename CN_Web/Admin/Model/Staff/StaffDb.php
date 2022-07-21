@@ -19,4 +19,9 @@ class StaffDb
         return $result;
     }
 
+    public function changePassword($new_pass) {
+        $sql = "UPDATE `staff` SET `password` = '$new_pass' WHERE `staff`.`staff_id` = 1";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->execute();
+    }
 }

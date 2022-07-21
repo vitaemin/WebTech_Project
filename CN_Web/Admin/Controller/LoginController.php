@@ -17,6 +17,10 @@ class LoginController
 
     public function renderLogin()
     {
+        if (isset($_SESSION['staff'])) {
+            unset($_SESSION['staff']);
+            session_destroy();
+        }
         include_once './View/Login.phtml';
     }
 

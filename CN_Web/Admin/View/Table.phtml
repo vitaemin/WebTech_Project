@@ -35,7 +35,7 @@ $tableCustomer = $tableController->getTableCustomerReserve();
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/Table.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <title>Document</title>
+    <title>Admin page</title>
 </head>
 <body>
 
@@ -51,10 +51,10 @@ $tableCustomer = $tableController->getTableCustomerReserve();
             <span class="header-identity">
                 <?php echo $staff[0]['name'];?>
                 <div class="user-info" id="user-info">
-                    <p><a href="./ChangePasswordForm.php">Doi mat khau</a></p>
-                    <p><a href="./index.php">Dang xuat</a></p>
+                    <p><a href="./ChangePasswordForm.php">Đổi mật khẩu</a></p>
+                    <p><a href="./index.php">Đăng xuất</a></p>
                 </div>
-            </span>
+            </span>          
         </div>
     </header>
 
@@ -65,7 +65,7 @@ $tableCustomer = $tableController->getTableCustomerReserve();
                 <i class="fa-solid fa-table"></i>
                 Quản lý Bàn
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Bill.php" class="sidebar-link">
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
@@ -574,6 +574,7 @@ $tableCustomer = $tableController->getTableCustomerReserve();
         });
     }
 </script>
+
 <script>
     const btn_update_reserve = document.getElementById("btn-update-reserve");
     const btn_cancel_reserve = document.getElementById("btn-cancel-reserve");
