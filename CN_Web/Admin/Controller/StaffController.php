@@ -4,7 +4,7 @@ namespace Controller;
 
 
 use Model\Database\DBConnect;
-use Model\Staff\TableDb;
+use Model\Staff\StaffDb;
 
 class StaffController{
     protected $staffDb;
@@ -12,7 +12,7 @@ class StaffController{
     public function __construct()
     {
         $db = new DBConnect();
-        $this->staffDb = new TableDb($db->connect());
+        $this->staffDb = new StaffDb($db->connect());
     }
 
     public function getStaff($staff_id){

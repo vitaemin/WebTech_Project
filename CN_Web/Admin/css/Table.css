@@ -363,6 +363,7 @@
     background-color: yellow;
     padding: 10px 20px;
     margin: auto;
+    margin-bottom: 10px;
     cursor: pointer;
     border-radius: 4px;
 }
@@ -468,5 +469,15 @@
     .content-nav{
         display: flex;
         flex-wrap: wrap;
+    }
+    .group-btn{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .popup-confirm-reserve{
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .form-confirm-reserve{
+        background-color: #c9c8c8;
     }
 }
