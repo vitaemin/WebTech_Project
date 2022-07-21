@@ -2,13 +2,12 @@
 
 namespace View\Event;
 use Controller\EventController;
-
 session_start();
 if(isset($_SESSION["staff"])){
     $staff = $_SESSION["staff"];
 //    var_dump($staff);
 }else{
-    header('Location: index.php');
+    header('Location: Login.php');
 }
 
 $eventController = new EventController();
@@ -29,20 +28,25 @@ $events = $eventController->getAllEvent();
 </head>
 <body>
 
-<div class = "page">
+<div class="page">
     <header class="header-wrapper">
         <div class="header-group">
+            <button class="btn-open-sidebar" onclick="openSide()">☰</button>
             <label> Tên nhà hàng</label>
         </div>
 
-        <div class="header-group">
+        <div class="header-group" onclick="handleClickOnUser()">
             <i class='fa-solid fa-user icon-user'></i>
             <span class="header-identity">
-                <?php #echo $staff[0]['name'];?>
-            </span>
-        </div>
+                <?php echo $staff[0]['name'];?>
+                <div class="user-info" id="user-info">
+                    <p><a href="./ChangePasswordForm.php">Đổi mật khẩu</a></p>
+                    <p><a href="./index.php">Đăng xuất</a></p>
+                </div>
+            </span>          
+        </div>  
     </header>
-    <div class="container">
+    <div class="container" id="container">
         <aside class="sidebar-wrapper">
             <a href="./Table.php" class="sidebar-link">
                 <i class="fa-solid fa-table"></i>
@@ -52,15 +56,15 @@ $events = $eventController->getAllEvent();
                 <i class="fa-solid fa-money-bill"></i>
                 Quản lý Hóa đơn
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Dish.php" class="sidebar-link">
                 <i class="fa-solid fa-utensils"></i>
                 Quản lý Món ăn
             </a>
-            <a href="#" class="sidebar-link active">
+            <a href="Event.php" class="sidebar-link active">
                 <i class="fa-solid fa-calendar-check"></i>
                 Quản lý Sự kiện
             </a>
-            <a href="#" class="sidebar-link">
+            <a href="Report.php" class="sidebar-link">
                 <i class="fa-solid fa-chart-column"></i>
                 Thống kê kinh doanh
             </a>
@@ -68,14 +72,14 @@ $events = $eventController->getAllEvent();
         
         <div class="content">
           <div class="wrapper">
-            <button class="add-event" onclick="addEvent()">Add Event</button>
+            <button class="add-event" onclick="addEvent()">Thêm sự kiện</button>
             <div class="event-list">             
                 <?php
                   echo "<table>
                           <tr>
-                            <th class='title'>Title</th>
-                            <th class='description'>Description</th>
-                            <th class='img_link'>Image</th>
+                            <th class='title'>Tiêu đề</th>
+                            <th class='description'>Mô tả</th>
+                            <th class='img_link'>Hình ảnh</th>
                             <th class='changebtn'></th>
                           </tr>";
                   foreach ($events as $index => $event) {
@@ -84,8 +88,8 @@ $events = $eventController->getAllEvent();
                     echo "<td>".$event['description']."</td>";
                     echo "<td><img src='".$event['image_link']."' /></td>";
                     echo "<td>
-                            <button class='editbtn' onclick='editEvent(".$event['event_id'].")'>Edit</button>
-                            <button class='deletebtn' onclick='deleteEvent(".$event['event_id'].")'>Delete</button>
+                            <button class='editbtn' onclick='editEvent(".$event['event_id'].")'>Sửa</button>
+                            <button class='deletebtn' onclick='deleteEvent(".$event['event_id'].")'>Xóa</button>
                           </td>";
                     echo "</tr>";
                   }
@@ -98,24 +102,24 @@ $events = $eventController->getAllEvent();
                 <button class="exit_add" onclick="exitAdd()">X</button>
                 <form action="./Event.php" method="POST">
                       <div class="new" id="event-id">
-                        <label>Event Id:</label>
+                        <label>Id sự kiện:</label>
                         <span id="event-id-to-edit"></span>
                         <input type="text" id="eventId" name="eventId" style="visibility:hidden" />
                       </div>
                       <div class="new">
-                          <label for="title">Title</label>
+                          <label for="title">Tiêu đề</label>
                           <input type="text" id="title" name="title" />
                       </div>
                       <div class="new">
-                          <label for="description">Description</label>
+                          <label for="description">Mô tả</label>
                           <textarea id="description" name="description"></textarea>
                       </div>
                       <div class="new">
-                          <label for="img_link">Image Link</label>
+                          <label for="img_link">Link hình ảnh</label>
                           <input type="text" id="img_link" name="imgLink" />
                       </div>
-                      <button class="agree-add" type="submit" name="add" id="addbtn">Add</button>
-                      <button class="agree-add" type="submit" name="update" id="updatebtn">Update</button>
+                      <button class="agree-add" type="submit" name="add" id="addbtn">Thêm</button>
+                      <button class="agree-add" type="submit" name="update" id="updatebtn">Sửa</button>
                 </form>
             </div>
           </div>
@@ -132,8 +136,36 @@ $events = $eventController->getAllEvent();
         </div>
     </div>
 </div>
+<script>
+    function openSide(){
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.add("sidebar-active") ;
+
+        window.addEventListener("mouseup", function(event) {
+            if (event.target != sidebar) {
+                sidebar.classList.remove("sidebar-active");
+            }
+        });
+
+        window.addEventListener("resize", () =>{
+            if(window.innerWidth > 414){
+                sidebar.classList.add("sidebar-active") ;
+            }
+        });
+    }
+</script>
 
 <script>
+    function handleClickOnUser() {
+        const user = document.getElementById('user-info');
+        if (user.style.display == "none") {
+            user.style.display = "block";
+            document.getElementById('container').style.opacity = 0.3;
+            return;
+        }
+        user.style.display = "none";
+        document.getElementById('container').style.opacity = 1;
+    }
 
     function addEvent() {
         const form = document.getElementById('event-form');

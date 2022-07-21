@@ -1,6 +1,9 @@
 .content {
 	width: calc(100vw - 250px);
+	height: calc(100vh - 70px);
+	min-width: 951px;
 	background-color: #f5f6f7;
+	margin: 0 auto;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -11,25 +14,27 @@
 	background-color: #fff;
 	padding: 20px;
 	display: flex;
+	justify-content: center;
 	flex-direction: column;
 	position: relative;
+	overflow: auto;
 }
 .add-event {
-	width: 100px;
+	width: 140px;
 	font-size: 16px;
 	font-weight: bold;
 	color: white;
 	background-color: #4fcf74;
 	border-radius: 4px;
 	border: none;
-	padding: 5px 10px;
+	padding: 10px;
 	position: absolute;
 	top: 20px;
 	right: 20px;
 	cursor: pointer;
 }
 .event-list {
-	margin-top: 60px;
+	margin-top: 400px;
 }
 table {
 	width: 100%;
@@ -83,6 +88,7 @@ td img {
 .add-event-layout {
 	display: none;
 	width: 100vw;
+	min-width: 951px;
 	height: 100vh;
 	position: absolute;
 	top: 0;
@@ -91,6 +97,7 @@ td img {
 }
 .add-wrapper {
 	width: 25%;
+	min-width: 400px;
 	background-color: white;
 	margin: 200px auto;
 	display: flex;
@@ -154,7 +161,8 @@ td img {
 .agree-add:hover {
 	background-color: #22d455;
 }
-#eventId, #eventId2 {
+#eventId,
+#eventId2 {
 	width: 0;
 }
 .agree-del {
@@ -170,4 +178,9 @@ td img {
 }
 .agree-del:hover {
 	background-color: #d80f0f;
+}
+@media screen and (max-width: 950px) {
+	.content {
+		width: 100%;
+	}
 }

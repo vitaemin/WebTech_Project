@@ -26,7 +26,6 @@ class EventController{
         $title = $_POST['title'];
         $description = $_POST['description'];
         $imgLink = $_POST['imgLink'];
-        // var_dump($title);
         if ((strlen($title) > 0) && (strlen($description) > 0) && (strlen($imgLink) > 0)) {
             $this->eventDb->addEvent($title, $description, $imgLink);
         }

@@ -1,1 +1,215 @@
 <?php
+
+namespace View\Table;
+use Controller\ReportController;
+session_start();
+if(isset($_SESSION["staff"])){
+    $staff = $_SESSION["staff"];
+}else{
+    header('Location: Login.php');
+}
+$reportController = new ReportController();
+?>
+<?php
+
+$dataWeek = array(
+    array("y" => $reportController->getTotalBillByWeek(1),"label" => "Monday" ),
+    array("y" => $reportController->getTotalBillByWeek(2),"label" => "Tuesday" ),
+    array("y" => $reportController->getTotalBillByWeek(3),"label" => "Wednesday" ),
+    array("y" => $reportController->getTotalBillByWeek(4),"label" => "Thursday" ),
+    array("y" => $reportController->getTotalBillByWeek(5),"label" => "Friday" ),
+    array("y" => $reportController->getTotalBillByWeek(6),"label" => "Saturday" ),
+    array("y" => $reportController->getTotalBillByWeek(0),"label" => "Sunday" )
+);
+
+?>
+<?php
+
+$dataMonth = array(
+    array("y" => $reportController->getTotalBillByMonth(01), "label" => "Tháng 1"),
+    array("y" => $reportController->getTotalBillByMonth(02), "label" => "Tháng 2"),
+    array("y" => $reportController->getTotalBillByMonth(03), "label" => "Tháng 3"),
+    array("y" => $reportController->getTotalBillByMonth(04), "label" => "Tháng 4"),
+    array("y" => $reportController->getTotalBillByMonth(05), "label" => "Tháng 5"),
+    array("y" => $reportController->getTotalBillByMonth(06), "label" => "Tháng 6"),
+    array("y" => $reportController->getTotalBillByMonth(07), "label" => "Tháng 7"),
+    array("y" => $reportController->getTotalBillByMonth(8), "label" => "Tháng 8"),
+    array("y" => $reportController->getTotalBillByMonth(9), "label" => "Tháng 9"),
+    array("y" => $reportController->getTotalBillByMonth(10), "label" => "Tháng 10"),
+    array("y" => $reportController->getTotalBillByMonth(11), "label" => "Tháng 11"),
+    array("y" => $reportController->getTotalBillByMonth(12), "label" => "Tháng 12")
+);
+
+?>
+<!doctype html>
+<html lang="en">
+<script>
+    window.onload = function () {
+
+        var chartMonth = new CanvasJS.Chart("chartMonth", {
+            title: {
+                text: "Doanh thu các tháng trong năm"
+            },
+            axisY: {
+                title: "Doanh thu (triệu VNĐ)",
+            },
+            data: [{
+                type: "line",
+                dataPoints: <?php echo json_encode($dataMonth, JSON_NUMERIC_CHECK); ?>
+            }]
+        });
+        chartMonth.render();
+
+        var chartWeek = new CanvasJS.Chart("chartWeek", {
+            animationEnabled: true,
+            title:{
+                text: "Doanh thu tuần này"
+            },
+            axisY: {
+                title: "Doanh thu (VNĐ)",
+                includeZero: true,
+                prefix: "",
+                suffix:  "k"
+            },
+            data: [{
+                type: "bar",
+                yValueFormatString: "#,##0K",
+                indexLabel: "{y}",
+                indexLabelPlacement: "inside",
+                indexLabelFontWeight: "bolder",
+                indexLabelFontColor: "white",
+                dataPoints: <?php echo json_encode($dataWeek, JSON_NUMERIC_CHECK); ?>
+            }]
+        });
+        chartWeek.render();
+    }
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/Report.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <title>Document</title>
+</head>
+<body>
+
+<div class = "page">
+    <header class="header-wrapper">
+        <div class="header-group">
+            <button class="btn-open-sidebar" onclick="openSide()">☰</button>
+            <label> Tên nhà hàng</label>
+        </div>
+
+        <div class="header-group">
+            <i class='fa-solid fa-user icon-user'></i>
+            <span class="header-identity">
+                <?php echo $staff[0]['name'];?>
+            </span>
+        </div>
+    </header>
+
+    <div id="container" class="container">
+        <aside id="sidebar" class="sidebar-wrapper">
+            <label>Danh mục quản lý</label>
+            <a href="Table.php" class="sidebar-link">
+                <i class="fa-solid fa-table"></i>
+                Quản lý Bàn
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-money-bill"></i>
+                Quản lý Hóa đơn
+            </a>
+            <a href="Dish.php" class="sidebar-link">
+                <i class="fa-solid fa-utensils"></i>
+                Quản lý Món ăn
+            </a>
+            <a href="Event.php" class="sidebar-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                Quản lý Sự kiện
+            </a>
+            <a href="#" class="sidebar-link active">
+                <i class="fa-solid fa-chart-column"></i>
+                Thống kê kinh doanh
+            </a>
+        </aside>
+
+        <content id="content-wrapper" class="content-wrapper">
+            <div class="turnover-list">
+                <div class="turnover-day">
+                    <label class="turnover-label">Doanh thu hôm nay</label>
+                    <div class="turnover-total">
+                        <?php echo $reportController->getTotalBillCurrentDay()?>K
+                    </div>
+                    <div class="turnover-datetime">
+                        <?php
+                        $mydate = getdate(date("U"));
+                        echo "$mydate[weekday], $mydate[month] $mydate[mday], $mydate[year]";
+                        ?>
+                    </div>
+                </div>
+                <div class="turnover-week">
+                    <label class="turnover-label">Doanh thu tuần </label>
+                    <div class="turnover-total">
+                        <?php echo $reportController->getTotalBillCurrentWeek()?>Tr
+                    </div>
+                </div>
+                <div class="turnover-month">
+                    <label class="turnover-label">Doanh thu tháng</label>
+                    <div class="turnover-total">
+                        <?php echo $reportController->getTotalBillCurrentMonth()?>Tr
+                    </div>
+                    <div class="turnover-datetime">
+                    <?php
+                    $mydate = getdate(date("U"));
+                    echo "$mydate[month] $mydate[mday], $mydate[year]";
+                    ?>
+                    </div>
+                </div>
+                <div class="turnover-total-all">
+                    <label class="turnover-label">Tổng doanh thu</label>
+                    <div class="turnover-total">
+                        <?php echo $reportController->getTotalAllBill()?>Tr
+                    </div>
+                    <div class="turnover-datetime">
+                    <?php
+                    $mydate = getdate(date("U"));
+                    echo "$mydate[year]";
+                    ?>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-list">
+                <div id="chartWeek" class="chartWeek"></div>
+                <div id="chartMonth" class="chartMonth"></div>
+            </div>
+        </content>
+    </div>
+</div>
+
+<!------------------------popup-confirm-end------------------------>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+    function openSide(){
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.add("sidebar-active") ;
+
+        window.addEventListener("mouseup", function(event) {
+            if (event.target != sidebar) {
+                sidebar.classList.remove("sidebar-active");
+            }
+        });
+
+        window.addEventListener("resize", () =>{
+            if(window.innerWidth > 414){
+                sidebar.classList.add("sidebar-active") ;
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

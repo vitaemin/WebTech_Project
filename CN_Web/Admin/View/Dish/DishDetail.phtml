@@ -1,0 +1,170 @@
+<?php
+
+namespace View\Dish;
+use Controller\DishController;
+// use Model;
+use Model\Dish\DishModel;
+session_start();
+if(isset($_SESSION["staff"])){
+    $staff = $_SESSION["staff"];
+//    var_dump($staff);
+}else{
+    header('Location: Login.php');
+}
+// session_start();
+// if(isset($_SESSION["staff"])){
+//     $staff = $_SESSION["staff"];
+// //    var_dump($staff);
+// } else{
+//     header('Location: index.php');
+// }
+// $tableController = new TableController();
+// $tables = $tableController->getAllTable();
+// //var_dump($tables);
+// $table_id = 1;
+// if(isset($_GET['table_id'])){
+//     $_SESSION['table_id'] = $_GET['table_id'];
+//     $table_id = $_SESSION['table_id'];
+// }
+// $currenttable = $tableController->getTableById($table_id);
+// $grouptable = $tableController->getTableByOtherTable($table_id);
+?>
+
+<?php 
+    // include('/xampp/htdocs/WebTechEServices/WebTech_Project/CN_Web/Admin/Model/Dish/DishModel.php');
+
+    $dish_1 = new DishModel(
+        '001', 
+        'mon_chinh', 
+        'Beaf Steak thịt bò Kobe Phiên bản Mỹ Đình',
+        'Ba chỉ bò Mỹ là thịt ba chỉ của con bò ở Mỹ',
+        '169000',
+        'https://cdn.shopify.com/s/files/1/2128/4095/products/Beef-Sirlion1_d64f721b-db11-4adf-ab7f-69c7d534fb4d_600x.jpg?v=1581030208'
+    );
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/Dish.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <title>Dish Detail</title>
+</head>
+<body>
+
+<div class = "page">
+    <header class="header-wrapper">
+        <div class="header-group">
+            <button class="btn-open-sidebar" onclick="openSide()">☰</button>
+            <label> Tên nhà hàng</label>
+        </div>
+
+        <div class="header-group">
+            <i class='fa-solid fa-user icon-user'></i>
+            <span class="header-identity">
+                <?php echo $staff[0]['name'];?>
+            </span>
+        </div>
+    </header>
+    <div class="container">
+        <aside id="sidebar" class="sidebar-wrapper">
+            <label>Danh mục quản lý</label>
+            <a href="Table.php" class="sidebar-link">
+                <i class="fa-solid fa-table"></i>
+                Quản lý Bàn
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-money-bill"></i>
+                Quản lý Hóa đơn
+            </a>
+            <a href="" class="sidebar-link active">
+                <i class="fa-solid fa-utensils"></i>
+                Quản lý Món ăn
+            </a>
+            <a href="Event.php" class="sidebar-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                Quản lý Sự kiện
+            </a>
+            <a href="Report.php" class="sidebar-link">
+                <i class="fa-solid fa-chart-column"></i>
+                Thống kê kinh doanh
+            </a>
+        </aside>
+
+        <content class="content-wrapper">
+            <nav class="content-nav-detail">
+                <?php
+                    // $reservetableurl = $_SERVER['PHP_SELF'];
+                    // $reservetableurl .= "?reserve";
+                    // echo "<a href='$reservetableurl' class='dish-button dish-button-return'>";
+                    // echo "Trở lại";
+                    // echo "</a>";
+                ?>
+                <form method="GET" action="./Dish.php">
+                    <button name="button_return" type="submit" class="dish-button dish-button-return">
+                        Trở lại              
+                    </button>
+                </form>
+                
+                <div class="dish-detail-title">Thông tin món ăn</div>
+                <!-- <a href="#" class="dish-button dish-button-add">
+                    <i class="fa-regular fa-square-plus"></i>
+                    Thêm món ăn              
+                </a> -->
+            </nav>
+            
+            <div class="dish-detail-container">
+                <div class="dish-detail-card">
+                    <img class="dish-detail-img" src="<?php echo $dish_1->getImageUrl()?>">
+                    <div class="dish-detail-price"></div>
+                </div>
+                <div class="dish-detail-info">
+                    <div class="detail-name">Tên món ăn</div>
+                    <p class="info-title">Thông tin món ăn</p>
+                    <ul class="detail-info">
+                        <li>Loại: <?php echo $dish_1->getCategory() ?></li>
+                        <li>Tên: <?php echo $dish_1->getName() ?></li>
+                        <li>Giá: <?php echo $dish_1->getPrice()?></li>
+                    </ul>
+                    <p class="info-title">Mô tả</p>
+                    <ul class="detail-info">
+                        <li><?php echo $dish_1->getDescription() ?></li>
+                    </ul>
+                    <p class="info-title">Thuộc Combo:</p>
+                    <ul class="detail-info">
+                        <li>Combo 1</li>
+                        <li>Combo 2</li>
+                        <li>Combo 3</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </content>
+    </div>
+</div>
+<script>
+    function openSide(){
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.add("sidebar-active") ;
+
+        window.addEventListener("mouseup", function(event) {
+            if (event.target != sidebar) {
+                sidebar.classList.remove("sidebar-active");
+            }
+        });
+
+        window.addEventListener("resize", () =>{
+            if(window.innerWidth > 414){
+                sidebar.classList.add("sidebar-active") ;
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
