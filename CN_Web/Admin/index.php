@@ -5,6 +5,8 @@ include('./Model/Login/LoginDb.php');
 include('./Controller/TableController.php');
 include('./Model/Table/TableDb.php');
 
+session_start();
+
 use Controller\LoginController;
 use Controller\TableController;
 
@@ -13,6 +15,7 @@ $loginController = new LoginController();
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
         if (isset($_SESSION['staff'])) {
+            var_dump(1);
             unset($_SESSION['staff']);
             session_destroy();
         }
