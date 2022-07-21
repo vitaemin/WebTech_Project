@@ -76,9 +76,14 @@ body{
 }
 /*-----------------sidebar----------------*/
 .sidebar-wrapper{
+<<<<<<< HEAD
     display: block;
     height: calc(100vh - 60px);
     width: 200px;
+=======
+    /* min-height: 100vh; */
+    width: 250px;
+>>>>>>> tiencm
     background-color: #ddeefe;
 }
 

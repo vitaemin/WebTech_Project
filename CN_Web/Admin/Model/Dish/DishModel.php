@@ -8,7 +8,7 @@ class DishModel {
     protected $description;
     protected $name;
     protected $price;
-    protected $image;
+    protected $image_url;
 
     public function __construct($dish_id, $category, $name, $description,  $price, $image_url)
     {

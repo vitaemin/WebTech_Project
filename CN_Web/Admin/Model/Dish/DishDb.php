@@ -12,27 +12,43 @@ class DishDb
     }
 
     public function getAllDish(){
-        $sql = "SELECT * FROM `dish` ";
+        $sql = "SELECT * FROM `dish`";
         $stmt = $this->connect->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
     }
 
-    // public function getTableById($table_id){
-    //     $sql = "SELECT * FROM `table` WHERE table_id = '$table_id'";
-    //     $stmt = $this->connect->prepare($sql);
-    //     $stmt->execute();
-    //     $result = $stmt->fetchAll();
+    public function getDishById($dish_id) {
+        $sql = "SELECT * FROM `dish` WHERE dish_id = $dish_id";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 
-    //     return $result;
-    // }
+    public function updateDish ($dish_id, $dish_name, $dish_description, $dish_price, $dish_image_url) {
+        $sql = "UPDATE `dish` 
+                SET `name` = '$dish_name', `description` = '$dish_description', `price` = $dish_price, `image_url` = '$dish_image_url' 
+                WHERE `dish`.`dish_id` = $dish_id";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->execute();
+    }
 
-    // public function reserveTable($table_id, $customer_name, $phone, $number_people, $time_reserve){
-    //     $sql = "UPDATE `table` SET status=1, customer_name='$customer_name', phone='$phone', number_people='$number_people', time_reserve = '$time_reserve' WHERE table_id = '$table_id'";
-    //     $stmt = $this->connect->prepare($sql);
-    //     $stmt->execute();
-    // }
+    public function insertDish ($dish_category, $dish_name, $dish_description, $dish_price, $dish_image_url) {
+        $sql = "INSERT INTO `dish` (`dish_id`, `category`, `name`, `description`, `price`, `image_url`) 
+                VALUES (NULL, '$dish_category', '$dish_name', '$dish_description', $dish_price, '$dish_image_url')";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->execute();
+    }
+
+    public function deleteDishById($dish_id) {
+        // $dish_id = intval($dish_id);
+        $sql = "DELETE FROM dish WHERE `dish`.`dish_id` = $dish_id";
+        // var_dump($dish_id);
+        $stmt = $this->connect->prepare($sql);
+        $stmt->execute();
+    }
 
     // public function getTableByCustomer($customer_name){
     //     $sql = "SELECT * FROM `table` WHERE customer_name = '$customer_name'";

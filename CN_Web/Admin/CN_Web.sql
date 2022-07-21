@@ -12,10 +12,21 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
+<<<<<<< HEAD
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+=======
+CREATE TABLE `dish`(
+    `dish_id` int not null primary key auto_increment,
+    `category` varchar(256),
+    `name` varchar(256) not null ,
+    `description` varchar(512),
+    `price` int not null ,
+    `image_url` varchar(512)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+>>>>>>> tiencm
 
 --
 -- Database: `cn_web`
@@ -38,6 +49,7 @@ CREATE TABLE `bill` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `bill`
 --
@@ -293,3 +305,11 @@ INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`,
 INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '11', '1', "Nguyễn Văn Biển", "0123455433", "2022-07-18 21:17:17", "4");
 INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '12', '1', "Nguyễn Văn Minh", "01234556733", "2022-07-14 21:17:17", "4");
 INSERT INTO `table` (`table_id`, `bill_id`, `number`, `status`, `customer_name`, `phone`, `time_reserve`, `number_people`) VALUES (NULL, NULL, '13', '1', "Nguyễn Văn Biển", "0123455433", "2022-07-18 21:17:17", "4");
+=======
+-- dish
+INSERT INTO `dish` (`dish_id`, `category`, `name`, `description`, `price`, `image_url`) VALUES (NULL, 'mon_chinh', 'Bò BeafSteak', 'Bò Beaf Steak được chế biến từ đầu bếp đẳng cấp nhất Việt Nam. Thơm ngon mời bạn ăn nha', '299000', 'https://naturallyvietnam.com/wp-content/uploads/2020/05/a54-1024x1024.jpg');
+
+
+
+
+>>>>>>> tiencm
